@@ -1,7 +1,8 @@
 var app = angular.module('app', [
   'ngRoute',
   'landing',
-  'create'
+  'create',
+  'ui.bootstrap.datetimepicker'
 ]);
 
 app.config(['$routeProvider',

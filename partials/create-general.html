@@ -1,1 +1,38 @@
-<a href="#create/programs">Programs</a>
+<header id="nav" class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/">Runner's High</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+       
+      </ul>
+    </div>
+  </div>
+</header>
+<section id="banner">
+  <div class="container">
+    <p id="currentpacequestion" style="margin-top: 100px">What pace do you currently run at?</p>
+    <input name="currentpaceanswer" ng-model="createVars.currentPace"></input>
+    <p id="achievedpacequestion">What pace would you like to achieve?</p>
+    <input name="achievedpaceanswer" ng-model="createVars.achievedPace"></input>
+    <br>
+	<div class="dropdown">
+	    <a  class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#create/general">Start Date</a>
+	    <ul class="dropdown-menu" role="menu">
+	        <datetimepicker data-ng-model="createVars.startDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown1' }"/>
+	    </ul>
+	</div>
+
+	<div class="dropdown">
+	    <a  class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">End Date</a>
+	    <ul class="dropdown-menu" role="menu">
+	        <datetimepicker data-ng-model="createVars.endDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+	    </ul>
+	</div>
+  </div>
+</section>
+<footer>
+<a href="#create/programs">Continue</a>
+</footer>

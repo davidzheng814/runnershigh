@@ -1,0 +1,61 @@
+.navbar-default .navbar-collapse {
+  border-color: #fff;
+}
+
+.navbar-default .navbar-brand {
+  color: #000;
+  font-weight:500;
+  font-size:20px;
+}
+
+#nav {
+  background-color: #fff;
+  border-color: #fff;
+  border: 0px;
+  opacity:.95;
+  box-shadow: 0 1px 3px 0 rgba(27,36,50,.15);
+  color: black !important;
+}
+
+#banner {
+  background-color: rgb(255, 157, 43);
+  width: 100%;
+  min-height: 600px;
+  margin: 0px;
+  color:white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align:center;
+}
+
+#banner h1 {
+  margin:180px auto 0 auto;
+  font-size:55px;
+  font-weight:500;
+}
+
+#banner p {
+  font-size:22px;
+  font-weight:200;
+  width:500px;
+  margin:5px auto 0 auto;
+}
+
+#banner #get-started {
+  margin:50px auto 0 auto;
+}
+
+#banner #get-started .btn {
+  color:white;
+  background-color:rgb(106, 103, 206);
+  font-size:18px;
+  border-color:rgb(106, 103, 206);
+  width:200px;
+  height:50px;
+}
+
+.dropdown {
+  display: inline-block;
+  margin-top: 25px;
+  margin-left: 80px;
+  margin-right: 80px;
+}
