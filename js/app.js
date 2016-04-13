@@ -1,7 +1,11 @@
 var app = angular.module('app', [
   'ngRoute',
   'landing',
-  'create'
+  'create',
+  'uiGmapgoogle-maps',
+  'main',
+  'trail',
+  'progress'
 ]);
 
 app.config(['$routeProvider',
@@ -43,3 +47,10 @@ app.config(['$routeProvider',
         redirectTo: '/'
       });
   }]);
+
+app.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
+  GoogleMapApi.configure({
+    key: 'AIzaSyBJ6A5DTkT18KY8DbvMkpqyWWm8wFUdCcY',
+    libraries: 'weather,geometry,visualization'
+  });
+}])
