@@ -124,9 +124,11 @@
 				    	<div class="panel-heading">
 							<h3 class="panel-title">Choose your training style</h3>
 						</div>
-				    	<div id="chart_steady" class="graph"></div>
-				    	<div id="chart_ramp" class="graph"></div>
-				    	<div id="chart_intense" class="graph"></div>
+						<div class="panel-body">
+					    	<div id="chart_steady" class="graph"><img src="../css/steady_graph.png"></div>
+					    	<div id="chart_ramp" class="graph"><img src="../css/ramp_up_graph.png"></div>
+					    	<div id="chart_intense" class="graph"><img src="../css/high_intensity_graph.png"></div>
+					    </div>
 				    </div>
 				</div>
 				<div class="col-xs-12">
@@ -173,7 +175,7 @@
 														  <option value="rowing">Rowing</option>
 														</select>
 											        </td>
-											        <td><input class="dailyrun"><input class="dailyrun"></td>
+											        <td></td>
 											    </tr>
 											    <tr>
 													<td>Monday 5/2</td>
@@ -212,8 +214,48 @@
 														  <option value="rowing">Rowing</option>
 														</select>
 											        </td>
-											        <td><input class="dailyrun"><input class="dailyrun"></td>
+											        <td><input class="dailyrun" value="4"> mi at <input class="dailyrun" value="8:30">min/mi</td>
 											    </tr>
+											    <tr>
+													<td>Thursday 5/5</td>
+											        <td>
+											        	<select>
+														  <option value="rest">Rest</option>
+														  <option value="running">Running</option>
+														  <option value="cycling">Cycling</option>
+														  <option value="swimming" selected="selected">Swimming</option>
+														  <option value="rowing">Rowing</option>
+														</select>
+											        </td>
+											        <td><input class="dailyrun" value="1"> hour</td>
+											    </tr>
+											    <tr>
+													<td>Friday 5/6</td>
+											        <td>
+											        	<select>
+														  <option value="rest">Rest</option>
+														  <option value="running" selected="selected">Running</option>
+														  <option value="cycling">Cycling</option>
+														  <option value="swimming">Swimming</option>
+														  <option value="rowing">Rowing</option>
+														</select>
+											        </td>
+											        <td><input class="dailyrun" value="5"> mi at <input class="dailyrun" value="8:30">min/mi</td>
+											    </tr>
+											    <tr>
+													<td>Saturday 5/7</td>
+											        <td>
+											        	<select>
+														  <option value="rest">Rest</option>
+														  <option value="running">Running</option>
+														  <option value="cycling" selected="selected">Cycling</option>
+														  <option value="swimming">Swimming</option>
+														  <option value="rowing">Rowing</option>
+														</select>
+											        </td>
+											        <td><input class="dailyrun" value="5"> mi at <input class="dailyrun" value="15">mi/hr</td>
+											    </tr>
+
 											</tbody>
 										</table>
 									</td>

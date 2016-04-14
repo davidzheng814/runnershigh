@@ -1,12 +1,3 @@
-<script>
-	$("#programs tr").click(function() {
-	    var selected = $(this).hasClass("highlight");
-	    $("#programs tr").removeClass("highlight");
-	    if(!selected)
-	            $(this).addClass("highlight");
-	});
-</script>
-
 <header id="nav" class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -20,7 +11,7 @@
     </div>
   </div>
 </header>
-<div class="container">
+<div class="container" ng-app="create" ng-controller="CreateProgramsCtrl">
     <div id ="create1" class="panel panel-default">
     	<div class="panel-heading">
 			<h3 class="panel-title">Suggested Programs</h3>
@@ -36,29 +27,16 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="pointer">
-					<td>Waitz</td>
-					<td>&#x2605;&#x2605;&#x2605;&#x2605;&#x2606;</td>
+				<tr ng-repeat="program in programs" class="pointer" ng-click="selectProgram(program)" name={{program.name}}>
+					<td>{{program.name}}</td>
+					<td><span class="glyphicon glyphicon-star" ng-repeat="i in range.slice(0,program.difficulty) track by $index"/><span class="glyphicon glyphicon-star-empty" ng-repeat="i in range.slice(0,5-program.difficulty) track by $index"/></td>
 					<td>
 						<ul>
-							<li>Running every day</li>
-							<li>Alternate easy and hard runs</li>
-							<li>No cross-training</li>
+							<li ng-repeat="bullet in program.description">{{bullet}}</li>
 						</ul>
 					</td>
 				</tr>
-				<tr class="pointer">
-					<td>FIRST</td>
-					<td>&#x2605;&#x2605;&#x2606;&#x2606;&#x2606;</td>
-					<td>
-						<ul>
-							<li>1 rest day</li>
-							<li>Alternate running and cross-training</li>
-							<li>Builds long run to 20 miles</li>
-						</ul>
-					</td>
-				</tr>
-				<tr class="pointer">
+				<tr class="pointer" ng-click="createProgram()" name="Own">
 					<td colspan="3">Create your own</td>
 				</tr>
 			</tbody>
@@ -68,13 +46,19 @@
 		        <input type="submit" class="btn btn-default" value="Back">
 		      </form>
 		      <form action="#create/details/">
-		        <input type="submit" class="btn btn-default" value="Continue">
+		        <input type="submit" class="btn btn-default" value="Continue" ng-click="update()">
 		      </form>
 		      <br class="clearFloat">
 		    </div>
 		</div>
 	</div>
 </div>
-<footer>
 
-</footer> 
+// <script>
+// 	$("#programs tr").click(function() {
+// 	    var selected = $(this).hasClass("highlight");
+// 	    $("#programs tr").removeClass("highlight");
+// 	    if(!selected)
+// 	            $(this).addClass("highlight");
+// 	});
+// </script>

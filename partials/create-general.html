@@ -1,13 +1,3 @@
-<script>
-$( document ).ready(function() {
-    $(function() {
-      $( ".datepicker" ).datepicker();
-  });
-  $(".selectable").bind("mousedown", function(e) {
-      e.metaKey = true;
-    }).selectable();
-});
-</script>
 <header id="nav" class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -21,41 +11,42 @@ $( document ).ready(function() {
     </div>
   </div>
 </header>
-<div class="container">
+<div class="container" ng-app="create" ng-controller="CreateGeneralCtrl">
     <div id ="create1" class="panel panel-default">
         <div class="panel-body">
             <div id="currentpacequestion" class="question input-group">
-                <input class="form-control" name="currentpaceanswer" ng-model="createVars.currentPace" aria-describedby="basic-addon2" placeholder="Current Pace">
+                <input class="form-control" name="currentpaceanswer" ng-model="currentPace" aria-describedby="basic-addon2" placeholder="Current Pace"/>
                 <span class="units input-group-addon" id="basic-addon2">min/mile</span>
             </div>
             <div id="achievedpacequestion" class="question input-group">
-                <input class="form-control" name="achievedpaceanswer" ng-model="createVars.achievedPace" aria-describedby="basic-addon2" placeholder="Goal Pace">
+                <input class="form-control" name="achievedpaceanswer" ng-model="achievedPace" aria-describedby="basic-addon2" placeholder="Goal Pace"/>
                 <span class="units input-group-addon" id="basic-addon2">min/mile</span>
             </div>
             <div id="dates">
-                <input type="text" class="datepicker form-control" placeholder="Start Date">
-                <input type="text" class="datepicker form-control" placeholder="Race Day">
+                <input type="text" class="datepicker form-control" placeholder="Start Date" ng-model="startDate"/>
+                <input type="text" class="datepicker form-control" placeholder="Race Day" ng-model="raceDay"/>
             </div>
             <div id="trainingdays">
                 <p>What days would you like to train?</p>
                 <ul class="list-group selectable pointer">
-                  <li class="list-group-item">Sunday</li>
-                  <li class="list-group-item">Monday</li>
-                  <li class="list-group-item">Tuesday</li>
-                  <li class="list-group-item">Wednesday</li>
-                  <li class="list-group-item">Thursday</li>
-                  <li class="list-group-item">Friday</li>
-                  <li class="list-group-item">Saturday</li>
+                  <li ng-repeat="day in days" class="list-group-item" ng-click="selectDay(day)" name={{day}}>{{day}}</li>
                 </ul>
             </div>
             <div class="navigate">
-              <form action="#create/programs/">
-                <input type="submit" class="btn btn-default" value="Continue">
+              <form>
+                <input type="submit" class="btn btn-default" value="Continue" ng-click="update()">
               </form>
             </div>
         </div>
     </div>
 </div>
-<footer>
-
-</footer> 
+<script>
+$( document ).ready(function() {
+    $(function() {
+      $( ".datepicker" ).datepicker();
+  });
+  // $(".selectable").bind("mousedown", function(e) {
+  //     e.metaKey = true;
+  //   }).selectable();
+});
+</script>

@@ -50,3 +50,8 @@
     width: 50px;
     margin-right: 5px;
 }
+
+.graph {
+    float: left;
+    margin-right: 15px;
+}
