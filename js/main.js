@@ -16,6 +16,48 @@ main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailV
   	// special = pink
 
   	$scope.events = [ //TODO
+  	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 4, 0), // A javascript date object for when the event starts
+	    pace: 8,
+	    distance: 4,
+	  },
+	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 5, 0), // A javascript date object for when the event starts
+	    pace: 8,
+	    distance: 7,
+	  },
+	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 6, 0), // A javascript date object for when the event starts
+	    pace: 8,
+	    distance: 5.3,
+	  },
+  	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 7, 0), // A javascript date object for when the event starts
+	    pace: 8,
+	    distance: 4.5,
+	  },
+	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 8, 0), // A javascript date object for when the event starts
+	    pace: 9,
+	    distance: 6,
+	  },
+	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 9, 0), // A javascript date object for when the event starts
+	    pace: 8,
+	    distance: 5.5,
+	  },
 	  {
 	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
 	   	activity: 'Running',
@@ -64,6 +106,27 @@ main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailV
 	    startsAt: new Date(2016, 3, 16, 0), // A javascript date object for when the event starts
 	    pace: 8,
 	    distance: 8,
+	  },
+	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 17, 0), // A javascript date object for when the event starts
+	    pace: 8,
+	    distance: 7,
+	  },
+	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 18, 0), // A javascript date object for when the event starts
+	    pace: 8,
+	    distance: 8.3,
+	  },
+	  {
+	    type: 'warning', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
+	   	activity: 'Running',
+	    startsAt: new Date(2016, 3, 19, 0), // A javascript date object for when the event starts
+	    pace: 8,
+	    distance: 8,
 	  }
 	];
 
@@ -92,6 +155,7 @@ main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailV
     	if($scope.submittedPace != undefined){
     		$scope.selectedEvent.pace = $scope.submittedPace;
     	}
+    	$('#submitButton').text("Submitted!");
     	
     }
 

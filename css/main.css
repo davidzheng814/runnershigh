@@ -1,6 +1,11 @@
 .css-name {
 }
 
+.container {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
 .calendar-entry {
 	text-align: center;
 	color: black;
