@@ -1,0 +1,44 @@
+.css-name {
+}
+
+.calendar-entry {
+	text-align: center;
+	color: black;
+	text-decoration: none;
+	padding: 15px;
+	border: solid;
+	border-width: .5px;
+}
+
+.title {
+	font-size: 25px;
+	color: blue;
+}
+
+.distance {
+	font-size: 30px;
+	margin: 15px;
+}
+
+.pace {
+	font-size: 15px;
+}
+
+.calendar {
+	height: 250px; /* TODO: less hacky */
+}
+
+.selected-event-heading {
+	text-align: center;
+	font-size: 25px;
+}
+
+.selected-event {
+	text-align: center;
+	padding: 15px;
+	font-size: 22px;
+}
+
+.selected-event .input-text {
+	margin: 3px;
+}

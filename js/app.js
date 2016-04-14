@@ -3,6 +3,7 @@ var app = angular.module('app', [
   'landing',
   'create',
   'uiGmapgoogle-maps',
+  'mwl.calendar',
   'main',
   'trail',
   'progress'
