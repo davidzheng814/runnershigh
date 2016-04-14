@@ -18,10 +18,13 @@
 }
 
 .trail-cell {
-  height:55px;
   margin-bottom:15px;
   position:relative;
   cursor:pointer;
+}
+
+.trail-name {
+  width:250px;
 }
 
 .original-trail {
@@ -47,7 +50,8 @@
 }
 
 #trail hr {
-  margin:5px;
+  margin-top:12px;
+  margin-bottom:0px;
   width:255px;
 }
 
@@ -58,7 +62,7 @@
 
 #trail-list {
   height:75vh;
-  overflow:scroll;
+  overflow:scroll;;
 }
 
 #save-btn {
