@@ -42,3 +42,8 @@
 .selected-event .input-text {
 	margin: 3px;
 }
+
+#minimap-view .angular-google-map-container { 
+  width:100%;
+  height:270px;
+}
