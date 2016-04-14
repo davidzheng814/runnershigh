@@ -43,7 +43,8 @@
   position:absolute;
 }
 
-.angular-google-map-container { 
+
+#trail .angular-google-map-container { 
   width:1000px;
   width:calc(100vw - 300px);
   height:100vh;

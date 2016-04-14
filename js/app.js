@@ -4,6 +4,7 @@ var app = angular.module('app', [
   'create',
   'uiGmapgoogle-maps',
   'mwl.calendar',
+  'highcharts-ng',
   'main',
   'trail',
   'progress'
@@ -55,3 +56,7 @@ app.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
     libraries: 'weather,geometry,visualization'
   });
 }])
+
+app.config(['highchartsNGProvider', function (highchartsNGProvider) {
+    highchartsNGProvider.lazyLoad();// will load hightcharts (and standalone framework if jquery is not present) from code.hightcharts.com
+}]);
