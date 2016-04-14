@@ -1,0 +1,72 @@
+#trail {
+  position:relative;
+}
+
+#picker-instruct {
+  margin:20px 20px;
+}
+
+#trail-sidebar {
+  top:0;
+  left:0;
+  width:300px;
+  height:100vh;
+  position:absolute;
+  -webkit-box-shadow: 5px 0 2px #888;
+  box-shadow: 5px 0 2px #888;
+  z-index:1;
+}
+
+.trail-cell {
+  margin-bottom:15px;
+  position:relative;
+  cursor:pointer;
+}
+
+.trail-name {
+  width:250px;
+}
+
+.original-trail {
+  color:green;
+}
+
+.trail-cell-select {
+  position:absolute;
+  top:11px;
+  right:30px;
+}
+
+#map-view {
+  top:0;
+  left:300px;
+  position:absolute;
+}
+
+
+#trail .angular-google-map-container { 
+  width:1000px;
+  width:calc(100vw - 300px);
+  height:100vh;
+}
+
+#trail hr {
+  margin-top:12px;
+  margin-bottom:0px;
+  width:255px;
+}
+
+#trail ul {
+  margin-left:20px;
+  padding-left:0px;
+}
+
+#trail-list {
+  height:75vh;
+  overflow:scroll;;
+}
+
+#save-btn {
+  width:200px;
+  margin:15px 50px;
+}

@@ -1,1 +1,31 @@
-<a href="#main">Go to Schedule Viewer</a>
+<div id="trail">
+  <div id="trail-sidebar">
+    <div id="picker-instruct"><h3>Choose a trail around {{currDayInfo.distance}} miles long:</h3></div>
+    <div id="trail-list">
+      <form>
+      <ul>
+        <li ng-repeat="trail in trailVars.trails" style="list-style-type:none">
+          <div class="trail-cell" id="trail-cell-{{trail.id}}" ng-click="newValue(trail.id)" ng-class="{'original-trail':trail.id==currTrail}">
+            <h4 class="trail-name">{{trail.name}}</h4>
+            <div>
+              Distance: {{trail.distance}} miles
+            </div>
+            <input class="trail-cell-select" type="radio" name="trail" ng-model="selectedTrailId" ng-value="trail.id" >
+            <hr>
+          </div>
+        </li>
+      </ul>
+      </form>
+    </div>
+    <div>
+      <a class="btn btn-primary" ng-click="save()" id="save-btn">Save Selection</a>
+    </div>
+  </div>
+  <div id="map-view">
+    <ui-gmap-google-map center='map.center' zoom='map.zoom' pan="true">
+      <ui-gmap-polygon path="selectedTrail.path" geodesic="mapconfig.geodesic" editable="mapconfig.editable" draggable="mapconfig.draggable" fit="mapconfig.fit" fill="mapconfig.fill", static="mapconfig.static", stroke="mapconfig.stroke">
+      </ui-gmap-polygon>
+      <ui-gmap-marker idKey="startLocId" coords="selectedTrail.startLoc"></ui-gmap-marker>
+    </ui-gmap-google-map>
+  </div>
+</div>

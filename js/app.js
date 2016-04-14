@@ -2,7 +2,13 @@ var app = angular.module('app', [
   'ngRoute',
   'landing',
   'create',
-  'ui.date'
+  'ui.date',
+  'uiGmapgoogle-maps',
+  'mwl.calendar',
+  'highcharts-ng',
+  'main',
+  'trail',
+  'progress'
 ]);
 
 app.config(['$routeProvider',
@@ -44,3 +50,14 @@ app.config(['$routeProvider',
         redirectTo: '/'
       });
   }]);
+
+app.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
+  GoogleMapApi.configure({
+    key: 'AIzaSyBJ6A5DTkT18KY8DbvMkpqyWWm8wFUdCcY',
+    libraries: 'weather,geometry,visualization'
+  });
+}])
+
+app.config(['highchartsNGProvider', function (highchartsNGProvider) {
+    highchartsNGProvider.lazyLoad();// will load hightcharts (and standalone framework if jquery is not present) from code.hightcharts.com
+}]);
