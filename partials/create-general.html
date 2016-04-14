@@ -1,3 +1,13 @@
+<script>
+$( document ).ready(function() {
+    $(function() {
+      $( ".datepicker" ).datepicker();
+  });
+  $(".selectable").bind("mousedown", function(e) {
+      e.metaKey = true;
+    }).selectable();
+});
+</script>
 <header id="nav" class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -11,28 +21,41 @@
     </div>
   </div>
 </header>
-<section id="banner">
-  <div class="container">
-    <p id="currentpacequestion" style="margin-top: 100px">What pace do you currently run at?</p>
-    <input name="currentpaceanswer" ng-model="createVars.currentPace"></input>
-    <p id="achievedpacequestion">What pace would you like to achieve?</p>
-    <input name="achievedpaceanswer" ng-model="createVars.achievedPace"></input>
-    <br>
-	<div class="dropdown">
-	    <a  class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#create/general">Start Date</a>
-	    <ul class="dropdown-menu" role="menu">
-	        <datetimepicker data-ng-model="createVars.startDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown1' }"/>
-	    </ul>
-	</div>
-
-	<div class="dropdown">
-	    <a  class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">End Date</a>
-	    <ul class="dropdown-menu" role="menu">
-	        <datetimepicker data-ng-model="createVars.endDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
-	    </ul>
-	</div>
-  </div>
-</section>
+<div class="container">
+    <div id ="create1" class="panel panel-default">
+        <div class="panel-body">
+            <div id="currentpacequestion" class="question input-group">
+                <input class="form-control" name="currentpaceanswer" ng-model="createVars.currentPace" aria-describedby="basic-addon2" placeholder="Current Pace">
+                <span class="units input-group-addon" id="basic-addon2">min/mile</span>
+            </div>
+            <div id="achievedpacequestion" class="question input-group">
+                <input class="form-control" name="achievedpaceanswer" ng-model="createVars.achievedPace" aria-describedby="basic-addon2" placeholder="Goal Pace">
+                <span class="units input-group-addon" id="basic-addon2">min/mile</span>
+            </div>
+            <div id="dates">
+                <input type="text" class="datepicker form-control" placeholder="Start Date">
+                <input type="text" class="datepicker form-control" placeholder="Race Day">
+            </div>
+            <div id="trainingdays">
+                <p>What days would you like to train?</p>
+                <ul class="list-group selectable pointer">
+                  <li class="list-group-item">Sunday</li>
+                  <li class="list-group-item">Monday</li>
+                  <li class="list-group-item">Tuesday</li>
+                  <li class="list-group-item">Wednesday</li>
+                  <li class="list-group-item">Thursday</li>
+                  <li class="list-group-item">Friday</li>
+                  <li class="list-group-item">Saturday</li>
+                </ul>
+            </div>
+            <div class="navigate">
+              <form action="#create/programs/">
+                <input type="submit" class="btn btn-default" value="Continue">
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
 <footer>
-<a href="#create/programs">Continue</a>
-</footer>
+
+</footer> 

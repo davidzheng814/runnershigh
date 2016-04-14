@@ -1,1 +1,80 @@
-<a href="#create/details">Details</a>
+<script>
+	$("#programs tr").click(function() {
+	    var selected = $(this).hasClass("highlight");
+	    $("#programs tr").removeClass("highlight");
+	    if(!selected)
+	            $(this).addClass("highlight");
+	});
+</script>
+
+<header id="nav" class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/">Runner's High</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+       
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="container">
+    <div id ="create1" class="panel panel-default">
+    	<div class="panel-heading">
+			<h3 class="panel-title">Suggested Programs</h3>
+		</div>
+		
+		<div class="panel-body">
+			<table class="table" id="programs">
+		    <thead>
+				<tr>
+					<th>Name</th>
+					<th>Difficulty</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="pointer">
+					<td>Waitz</td>
+					<td>&#x2605;&#x2605;&#x2605;&#x2605;&#x2606;</td>
+					<td>
+						<ul>
+							<li>Running every day</li>
+							<li>Alternate easy and hard runs</li>
+							<li>No cross-training</li>
+						</ul>
+					</td>
+				</tr>
+				<tr class="pointer">
+					<td>FIRST</td>
+					<td>&#x2605;&#x2605;&#x2606;&#x2606;&#x2606;</td>
+					<td>
+						<ul>
+							<li>1 rest day</li>
+							<li>Alternate running and cross-training</li>
+							<li>Builds long run to 20 miles</li>
+						</ul>
+					</td>
+				</tr>
+				<tr class="pointer">
+					<td colspan="3">Create your own</td>
+				</tr>
+			</tbody>
+		</table>
+			<div class="navigate">
+		      <form action="#create/general/">
+		        <input type="submit" class="btn btn-default" value="Back">
+		      </form>
+		      <form action="#create/details/">
+		        <input type="submit" class="btn btn-default" value="Continue">
+		      </form>
+		      <br class="clearFloat">
+		    </div>
+		</div>
+	</div>
+</div>
+<footer>
+
+</footer> 
