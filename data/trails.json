@@ -1,0 +1,50 @@
+{
+trails:[
+  {name:'Trail 1', distance:5, id:"1"},
+  {name: 'Trail 2',distance:6.2, id:"2", path:[
+  {latitude:42.35394551002023,longitude:-71.11042499542236},
+  {latitude:42.35337464975264,longitude:-71.10724925994873},
+  {latitude:42.353533222569325,longitude:-71.10458850860596},
+  {latitude:42.35492864610414,longitude:-71.09956741333008},
+  {latitude:42.35505550125277,longitude:-71.09879493713379},
+  {latitude:42.357085148806966,longitude:-71.09265804290771},
+  {latitude:42.35140831358662,longitude:-71.08982563018799},
+  {latitude:42.35109115683081,longitude:-71.09210014343262},
+  {latitude:42.35045683851824,longitude:-71.09519004821777},
+  {latitude:42.351122872578436,longitude:-71.10338687896729},
+  {latitude:42.351788899581074,longitude:-71.11085414886475},
+  {latitude:42.35394551002023,longitude:-71.11051082611084}
+  ]},
+  {name: 'Trail 3',distance:6.4, id:"3"},
+  {name:'Trail 4', distance:6.5, id:"4", path:[
+  {latitude:42.35727542490437,longitude:-71.09270095825195},
+  {latitude:42.36095398287821,longitude:-71.08162879943848},
+  {latitude:42.36076371791946,longitude:-71.07931137084961},
+  {latitude:42.36152477429757,longitude:-71.07853889465332},
+  {latitude:42.363681050641695,longitude:-71.07836723327637},
+  {latitude:42.36916653771024,longitude:-71.07321739196777},
+  {latitude:42.36653483201389,longitude:-71.06750965118408},
+  {latitude:42.36624945971019,longitude:-71.06845378875732},
+  {latitude:42.36494941392239,longitude:-71.06956958770752},
+  {latitude:42.3636493412316,longitude:-71.07029914855957},
+  {latitude:42.36244437178873,longitude:-71.0722303390503},
+  {latitude:42.36054174140609,longitude:-71.0725736618042},
+  {latitude:42.35974896174244,longitude:-71.0722303390503},
+  {latitude:42.356213042655384,longitude:-71.07356071472168},
+  {latitude:42.355991050066166,longitude:-71.07394695281982},
+  {latitude:42.352232913662,longitude:-71.08716487884521},
+  {latitude:42.35196333405838,longitude:-71.0900616645813},
+  ]},
+  {name: 'Trail 5',distance:6.7, id:"5"},
+  {name: 'Trail 6',distance:6.9, id:"6"},
+  {name:'Trail 7', distance:7.2, id:"7"},
+  {name: 'Trail 8',distance:7.5, id:"8"},
+  {name: 'Trail 9',distance:7.8, id:"9"},
+  {name:'Trail 10', distance:7.9, id:"10"},
+  {name: 'Trail 11',distance:8.2, id:"11"},
+  {name: 'Trail 12',distance:8.5, id:"12"}
+  ], 
+idToPos:{
+    "1":0, "2":1, "3":2, "4":3, "5":4, "6":5, "7":6, "8":7, "9":8, "10":9, "11":10, "12":11
+  }
+}
