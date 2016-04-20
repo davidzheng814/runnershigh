@@ -1,8 +1,8 @@
 <script>
-	$("button[id^=show_]").click(function(event) {
-	    $("#extra_" + $(this).attr('id').substr(5)).slideToggle("fast");
-	    event.preventDefault();
-	})
+  $("button[id^=show_]").click(function(event) {
+      $("#extra_" + $(this).attr('id').substr(5)).slideToggle("fast");
+      event.preventDefault();
+  })
 </script>
 
 <header id="nav" class="navbar navbar-default navbar-fixed-top">
@@ -20,284 +20,123 @@
 </header>
 <div class="container">
     <div id ="create1" class="panel panel-default">
-    	<div class="panel-body">
-	    	<div class="row">
-		    	<div class="col-xs-6">
-				    <div id="activities" class="panel panel-info">
-				    	<div class="panel-heading">
-							<h3 class="panel-title">Activities</h3>
-						</div>
-						<div class="panel-body">
-					    	<table id="activitiestable" class="table">
-							  <tbody>
-							    <tr>
-							      <td>Sunday</td>
-							      <td>
-							      	<select>
-									  <option value="rest" selected="selected">Rest</option>
-									  <option value="running">Running</option>
-									  <option value="cycling">Cycling</option>
-									  <option value="swimming">Swimming</option>
-									  <option value="rowing">Rowing</option>
-									</select>
-							      </td>
-							    </tr>
-							    <tr>
-							      <td>Monday</td>
-							      <td>
-							      	<select>
-									  <option value="rest">Rest</option>
-									  <option value="running" selected="selected">Running</option>
-									  <option value="cycling">Cycling</option>
-									  <option value="swimming">Swimming</option>
-									  <option value="rowing">Rowing</option>
-									</select>
-							      </td>
-							    </tr>
-							    <tr>
-							      <td>Tuesday</td>
-							      <td>
-							      	<select>
-									  <option value="rest">Rest</option>
-									  <option value="running">Running</option>
-									  <option value="cycling" selected="selected">Cycling</option>
-									  <option value="swimming">Swimming</option>
-									  <option value="rowing">Rowing</option>
-									</select>
-							      </td>
-							    </tr>
-							    <tr>
-							      <td>Wednesday</td>
-							      <td>
-							      	<select>
-									  <option value="rest">Rest</option>
-									  <option value="running" selected="selected">Running</option>
-									  <option value="cycling">Cycling</option>
-									  <option value="swimming">Swimming</option>
-									  <option value="rowing">Rowing</option>
-									</select>
-							      </td>
-							    </tr>
-							    <tr>
-							      <td>Thursday</td>
-							      <td>
-							      	<select>
-									  <option value="rest">Rest</option>
-									  <option value="running">Running</option>
-									  <option value="cycling">Cycling</option>
-									  <option value="swimming" selected="selected">Swimming</option>
-									  <option value="rowing">Rowing</option>
-									</select>
-							      </td>
-							    </tr>
-							    <tr>
-							      <td>Friday</td>
-							      <td>
-							      	<select>
-									  <option value="rest">Rest</option>
-									  <option value="running" selected="selected">Running</option>
-									  <option value="cycling">Cycling</option>
-									  <option value="swimming">Swimming</option>
-									  <option value="rowing">Rowing</option>
-									</select>
-							      </td>
-							    </tr>
-							    <tr>
-							      <td>Saturday</td>
-							      <td>
-							      	<select>
-									  <option value="rest">Rest</option>
-									  <option value="running">Running</option>
-									  <option value="cycling" selected="selected">Cycling</option>
-									  <option value="swimming">Swimming</option>
-									  <option value="rowing">Rowing</option>
-									</select>
-							      </td>
-							    </tr>
-							  </tbody>
-							</table>
-						</div>
-					</div>
-			    </div>
-			    <div class="col-xs-6">
-				    <div id="trainingstyle" class="panel panel-info">
-				    	<div class="panel-heading">
-							<h3 class="panel-title">Choose your training style</h3>
-						</div>
-						<div class="panel-body">
-					    	<div id="chart_steady" class="graph"><img src="../css/steady_graph.png"></div>
-					    	<div id="chart_ramp" class="graph"><img src="../css/ramp_up_graph.png"></div>
-					    	<div id="chart_intense" class="graph"><img src="../css/high_intensity_graph.png"></div>
-					    </div>
-				    </div>
-				</div>
-				<div class="col-xs-12">
-				    <div id="schedulepanel" class="panel panel-info">
-				    	<div class="panel-heading">
-							<h3 class="panel-title">Schedule</h3>
-						</div>
-						<table class="table" id="schedule">
-						    <thead>
-								<tr>
-									<th>Week</th>
-									<th>Max Mileage</th>
-									<th>Min Pace</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>5/1-5/7</td>
-									<td>5 mi</td>
-									<td>8:30 min/mi</td>
-									<td><button class="glyphicon glyphicon-info-sign scheduleinfo" aria-hidden="true" 
-												ng-click="pressed1=!pressed1" id="show_1"></button></td>
-								</tr>
-								<tr id="extra_1" style="display: none;">
-									<td colspan="4">
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Day</th>
-													<th>Activity</th>
-													<th>Length</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Sunday 5/1</td>
-											        <td>
-											        	<select>
-														  <option value="rest" selected="selected">Rest</option>
-														  <option value="running">Running</option>
-														  <option value="cycling">Cycling</option>
-														  <option value="swimming">Swimming</option>
-														  <option value="rowing">Rowing</option>
-														</select>
-											        </td>
-											        <td></td>
-											    </tr>
-											    <tr>
-													<td>Monday 5/2</td>
-											        <td>
-											        	<select>
-														  <option value="rest">Rest</option>
-														  <option value="running" selected="selected">Running</option>
-														  <option value="cycling">Cycling</option>
-														  <option value="swimming">Swimming</option>
-														  <option value="rowing">Rowing</option>
-														</select>
-											        </td>
-											        <td><input class="dailyrun" value="3"> mi at <input class="dailyrun" value="9:00">min/mi</td>
-											    </tr>
-											    <tr>
-													<td>Tuesday 5/3</td>
-											        <td>
-											        	<select>
-														  <option value="rest">Rest</option>
-														  <option value="running">Running</option>
-														  <option value="cycling" selected="selected">Cycling</option>
-														  <option value="swimming">Swimming</option>
-														  <option value="rowing">Rowing</option>
-														</select>
-											        </td>
-											        <td><input class="dailyrun" value="5"> mi at <input class="dailyrun" value="15">mi/hr</td>
-											    </tr>
-											    <tr>
-													<td>Wednesday 5/4</td>
-											        <td>
-											        	<select>
-														  <option value="rest">Rest</option>
-														  <option value="running" selected="selected">Running</option>
-														  <option value="cycling">Cycling</option>
-														  <option value="swimming">Swimming</option>
-														  <option value="rowing">Rowing</option>
-														</select>
-											        </td>
-											        <td><input class="dailyrun" value="4"> mi at <input class="dailyrun" value="8:30">min/mi</td>
-											    </tr>
-											    <tr>
-													<td>Thursday 5/5</td>
-											        <td>
-											        	<select>
-														  <option value="rest">Rest</option>
-														  <option value="running">Running</option>
-														  <option value="cycling">Cycling</option>
-														  <option value="swimming" selected="selected">Swimming</option>
-														  <option value="rowing">Rowing</option>
-														</select>
-											        </td>
-											        <td><input class="dailyrun" value="1"> hour</td>
-											    </tr>
-											    <tr>
-													<td>Friday 5/6</td>
-											        <td>
-											        	<select>
-														  <option value="rest">Rest</option>
-														  <option value="running" selected="selected">Running</option>
-														  <option value="cycling">Cycling</option>
-														  <option value="swimming">Swimming</option>
-														  <option value="rowing">Rowing</option>
-														</select>
-											        </td>
-											        <td><input class="dailyrun" value="5"> mi at <input class="dailyrun" value="8:30">min/mi</td>
-											    </tr>
-											    <tr>
-													<td>Saturday 5/7</td>
-											        <td>
-											        	<select>
-														  <option value="rest">Rest</option>
-														  <option value="running">Running</option>
-														  <option value="cycling" selected="selected">Cycling</option>
-														  <option value="swimming">Swimming</option>
-														  <option value="rowing">Rowing</option>
-														</select>
-											        </td>
-											        <td><input class="dailyrun" value="5"> mi at <input class="dailyrun" value="15">mi/hr</td>
-											    </tr>
-
-											</tbody>
-										</table>
-									</td>
-								</tr>
-								<tr>
-									<td>5/8-5/14</td>
-									<td>7 mi</td>
-									<td>8:00 min/mi</td>
-									<td><button class="glyphicon glyphicon-info-sign" aria-hidden="true" ng-model="pressed2"></button></td>
-								</tr>
-								<tr>
-									<td>5/15-5/21</td>
-									<td>9 mi</td>
-									<td>7:30 min/mi</td>
-									<td><button class="glyphicon glyphicon-info-sign" aria-hidden="true" ng-model="pressed3"></button></td>
-								</tr>
-								<tr>
-									<td>5/22-5/28</td>
-									<td>11 mi</td>
-									<td>7:00 min/mi</td>
-									<td><button class="glyphicon glyphicon-info-sign" aria-hidden="true" ng-model="pressed4"></button></td>
-								</tr>
-							</tbody>
-						</table>
-				    </div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="navigate">
-				      <form action="#create/programs/">
-				        <input type="submit" class="btn btn-default" value="Back">
-				      </form>
-				      <form action="#main/" style="display:inline-block">
-				        <input type="submit" class="btn btn-default" value="Done!">
-				      </form>
-				      <br class="clearFloat">
-				    </div>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-6">
+            <div id="activities" class="panel panel-info">
+              <div class="panel-heading">
+              <h3 class="panel-title">Activities</h3>
+            </div>
+            <div class="panel-body">
+                <table id="activitiestable" class="table">
+                <tbody>
+                  <tr ng-repeat="day in days">
+                    <td>
+                      {{day}}
+                    </td>
+                    <td>
+                      <select ng-model="myActivities[day]">
+                        <option ng-repeat="activity in activities" value="{{activity}}">
+                          {{activity | capitalize}}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </div>
+          <div class="col-xs-6">
+            <div id="trainingstyle" class="panel panel-info">
+              <div class="panel-heading">
+              <h3 class="panel-title">Program Overview</h3>
+            </div>
+            <div class="panel-body">
+                <highchart id="schedule-chart" config="optionsConfig"></highchart>
+              </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div id="schedulepanel" class="panel panel-info">
+              <div class="panel-heading">
+              <h3 class="panel-title">Schedule</h3>
+            </div>
+            <table class="table" id="schedule">
+                <thead>
+                <tr>
+                  <th>Week</th>
+                  <th>Max Mileage</th>
+                  <th>Min Pace</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat-start="week in scheduleByWeek">
+                  <td>{{week.date | weekRange}}</td>
+                  <td>{{week.sched | maxMileage}}</td>
+                  <td>{{week.sched | formatMinPace}} min/mi</td>
+                  <td><button class="glyphicon glyphicon-info-sign scheduleinfo" aria-hidden="true" 
+                        ng-click="showWeek(week)"></button></td>
+                </tr>
+                <tr ng-repeat-end ng-show="week.show">
+                  <td colspan="4">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Day</th>
+                          <th>Activity</th>
+                          <th>Length</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="day in week.sched">
+                          <td>{{day.date | formatDate}}</td>
+                          <td>
+                            <select ng-model="day.activity" ng-change="changed(day)">
+                              <option ng-repeat="activity in activities" value="{{activity}}">
+                                {{activity | capitalize}}
+                              </option>
+                            </select>
+                          </td>
+                          <td ng-show="day.activity=='rest'"></td>
+                          <td ng-show="day.activity=='running'">
+                            <input class="dailyrun" value="{{day.distance}}" id="running-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi at <input class="dailyrun" ng-blur="changed(day)" id="running-pace-{{day.date.getTime()}}" value="{{day.pace | formatPace}}">min/mi
+                          </td>
+                          <td ng-show="day.activity=='rowing'">
+                            <input class="dailyrun" value="{{day.distance}}" id="rowing-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi
+                          </td>
+                          <td ng-show="day.activity=='swimming'">
+                            <input class="dailyrun" value="{{day.distance}}" id="swimming-dist-{{day.date.getTime()}}"  ng-blur="changed(day)"> mi
+                          </td>
+                          <td ng-show="day.activity=='biking'">
+                            <input class="dailyrun" value="{{day.distance}}" id="biking-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi at <input class="dailyrun" id="biking-pace-{{day.date.getTime()}}" value="{{day.pace | formatPace}}"  ng-blur="changed(day)">min/mi
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="navigate">
+              <form action="#create/programs/">
+                <input type="submit" class="btn btn-default" value="Back">
+              </form>
+              <form action="#main/" style="display:inline-block">
+                <input type="submit" class="btn btn-default" value="Done!">
+              </form>
+              <br class="clearFloat">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <footer>
 

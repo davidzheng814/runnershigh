@@ -18,11 +18,7 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
       $scope.myMileages.push([$scope.myProgress[i].date.getTime(), $scope.myProgress[i].distance]);
       $scope.myPaces.push([$scope.myProgress[i].date.getTime(), $scope.myProgress[i].pace]);
     }
-
-    $scope.goalMileages.sort(function(a, b){return a[0] - b[0]});
-    $scope.goalPaces.sort(function(a, b){return a[0] - b[0]});
-    $scope.myMileages.sort(function(a, b){return a[0] - b[0]});
-    $scope.myPaces.sort(function(a, b){return a[0] - b[0]});
+    
     $scope.optionsConfig = {
         options: {
             chart: {
@@ -45,20 +41,20 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
               endOnTick:true
             },
             yAxis: [{
-                labels: {
-                  format: '{value} mi',
-                  reserveSpace:true,
-                  style: {
-                    color:'#5454FF'
-                  }
-                },
-                title: {
-                    text: 'Mileage',
-                    style: {
-                      'font-size':'20px',
-                      color:'#5454FF'
-                    }
+              labels: {
+                format: '{value} mi',
+                reserveSpace:true,
+                style: {
+                  color:'#5454FF'
                 }
+              },
+              title: {
+                text: 'Mileage',
+                style: {
+                  'font-size':'20px',
+                  color:'#5454FF'
+                }
+              }
             }, { 
                 opposite: true, 
                 labels: {

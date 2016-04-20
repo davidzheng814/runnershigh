@@ -49,7 +49,8 @@ landing.factory('schedVars', function(){
         {date:new Date(2016,4,8),distance:10.2,pace:7,activity:'running'},
     ];
     var activities = ['running', 'swimming', 'biking', 'rowing', 'rest'];
-    return {schedule:schedule, activities:activities, myProgress:myProgress};
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return {schedule:schedule, activities:activities, myProgress:myProgress, days:days};
 });
 
 landing.controller('LandingCtrl', ['$scope', '$http',  
