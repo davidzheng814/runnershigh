@@ -1,14 +1,96 @@
 var create = angular.module('create', ['nya.bootstrap.select']);
 
 create.factory('createVars', function(){
-  var selectedDays = [];
-  var currentPace = "";
-  var achievedPace = "";
-  var startDate = "";
-  var raceDate = "";
-  var mileage = "";
-  var mileages = [" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"];
-  return {selectedDays:selectedDays,currentPace:currentPace,achievedPace:achievedPace,startDate:startDate,raceDate:raceDate,mileage:mileage,mileages:mileages};
+  var createVars = {
+    selectedDays:[], currentPace:"", achievedPace:"", startDate:"", raceDate:"",
+    mileage:"", mileages:[" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"]
+  };
+  var programs = [{
+    activities:['running', 'biking', 'running', 'running'],
+    sched:{
+      running:[
+        {distance:4,pace:8},
+        {distance:4,pace:8},
+        {distance:4,pace:7},
+        {distance:8,pace:7},
+        {distance:10,pace:7},
+        {distance:10,pace:7},
+        {distance:11,pace:7.5},
+        {distance:12,pace:7},
+        {distance:13,pace:7.5},
+        {distance:13,pace:7.5},
+        {distance:13,pace:7.5},
+        {distance:13,pace:7.5}],
+      biking:[
+        {distance:5,pace:8},
+        {distance:4,pace:8},
+        {distance:4,pace:7},
+        {distance:8,pace:7},
+        {distance:10,pace:7},
+        {distance:10,pace:7},
+        {distance:11,pace:7.5},
+        {distance:12,pace:7},
+        {distance:13,pace:7.5},
+        {distance:13,pace:7.5},
+        {distance:13,pace:7.5},
+        {distance:13,pace:7.5}],
+      rowing:[
+        {distance:5},
+        {distance:6},
+        {distance:7},
+        {distance:8},
+        {distance:10},
+        {distance:10},
+        {distance:13},
+        {distance:15},
+        {distance:16},
+        {distance:19},
+        {distance:20},
+        {distance:23}]
+    }
+  }];
+  createVars.programId = 0;
+  createVars.trainingDays = ['Monday', 'Wednesday', 'Friday'];
+  createVars.startDate = new Date(2016, 4, 1);
+  createVars.endDate = new Date(2016, 4, 31);
+  var createSchedule = function(schedule){
+    schedule.length = 0;
+    var program = programs[createVars.programId];
+    createVars.myActivities = {Sunday:'rest', Monday:'rest', Tuesday:'rest', Wednesday:'rest', Thursday:'rest', Friday:'rest', Saturday:'rest'};
+    for(i = 0; i < createVars.trainingDays.length; ++i) {
+      createVars.myActivities[createVars.trainingDays[i]] = program.activities[i];
+    }
+    var date = new Date(createVars.startDate);
+    var toDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var counter = 0;
+    function lastSunday(day) {
+      d = new Date(day);
+      d.setDate(d.getDate() - d.getDay());
+      return d;
+    }
+    var lastSun = lastSunday(date);
+    while (date.getTime() <= createVars.endDate.getTime()) {
+      var day = toDay[date.getDay()];
+      var activity = createVars.myActivities[day];
+      if(activity == 'running' || activity == 'biking') {
+        schedule.push({date:new Date(date), activity:activity, 
+          distance:program.sched[activity][counter].distance,
+          pace:program.sched[activity][counter].pace});
+      } else if (activity == 'swimming' || activity == 'rowing') {
+        schedule.push({date:new Date(date), activity:activity, distance:program.sched[activity][counter]});
+      } else {
+        schedule.push({date:new Date(date), activity:activity});
+      }
+      date.setDate(date.getDate() + 1);
+      if(lastSunday(date).getTime() != lastSun.getTime()) {
+        lastSun = lastSunday(date);
+        ++counter;
+      }
+    }
+  }
+  createVars.programs = programs, createVars.createSchedule = createSchedule;
+  return createVars;
+>>>>>>> Made schedule load dynamically from program
 });
 
 create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedVars', 
@@ -144,8 +226,9 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
   function($scope, $routeParams, createVars, schedVars) {
     create = $scope;
     $scope.days = schedVars.days;
-    createVars.myActivities = {Sunday:'rest', Monday:'rest', Tuesday:'rest', Wednesday:'running', 
-                               Thursday:'running',Friday:'running', Saturday:'running'};
+    createVars.createSchedule(schedVars.schedule);
+    // createVars.myActivities = {Sunday:'rest', Monday:'rest', Tuesday:'rest', Wednesday:'running', 
+    //                            Thursday:'running',Friday:'running', Saturday:'running'};
     $scope.myActivities = createVars.myActivities;
     $scope.activities = schedVars.activities;
     $scope.schedule = schedVars.schedule;
@@ -192,6 +275,32 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
     $scope.$watch(function(){
       return $scope.schedule;
     }, $scope.updateChart, true);
+
+    $scope.$watch('myActivities', function(newValue, oldValue) {
+      var program = createVars.programs[createVars.programId];
+      var toDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      for(day in newValue) {
+        if(newValue[day] != oldValue[day]) {
+          var newActivity = newValue[day];
+          var ind = 0;
+          for(i = 0; i < $scope.schedule.length; ++i) {
+            if(day == toDay[$scope.schedule[i].date.getDay()]) {
+              $scope.schedule[i].activity = newActivity;
+              if(newActivity == 'running' || newActivity == 'biking') {
+                $scope.schedule[i].pace = program.sched[newActivity][ind].pace;
+                $scope.schedule[i].distance = program.sched[newActivity][ind].distance;
+              } else if(newActivity == 'swimming' || newActivity == 'rowing') {
+                delete $scope.schedule[i].pace;
+                $scope.schedule[i].distance = program.sched[newActivity][ind].distance;
+              }else {
+                delete $scope.schedule[i].distance, delete $scope.schedule[i].pace;
+              }
+              ++ind;
+            }
+          }
+        }
+      }
+    }, true);
 
     $scope.changed = function(day) {
       if(day.activity == 'rest') {
@@ -359,8 +468,11 @@ create.filter('capitalize', function() {
 
 create.filter('weekRange', function(){
   return function(date) {
+    var end = new Date(date);
+    end.setDate(end.getDate() + 6);
     var text = (date.getMonth()+1)+'/'+date.getDate();
-    return text;
+    var endtext = (end.getMonth() + 1) + '/' + end.getDate();
+    return text+'-'+endtext;
   }
 });
 
