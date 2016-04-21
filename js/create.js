@@ -2,7 +2,7 @@ var create = angular.module('create', ['nya.bootstrap.select']);
 
 create.factory('createVars', function(){
   var createVars = {
-    selectedDays:[], currentPace:"", achievedPace:"", startDate:"", raceDate:"",
+    selectedDays:[], currentPace:"", achievedPace:"", startDate:new Date(0, 0, 0), endDate:new Date(0, 0, 0),
     mileage:"", mileages:[" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"]
   };
   var programs = [{
@@ -51,10 +51,9 @@ create.factory('createVars', function(){
   }];
   createVars.programId = 0;
   createVars.trainingDays = ['Monday', 'Wednesday', 'Friday'];
-  createVars.startDate = new Date(2016, 4, 1);
-  createVars.endDate = new Date(2016, 4, 31);
   var createSchedule = function(schedule){
     schedule.length = 0;
+    console.log(createVars);
     var program = programs[createVars.programId];
     createVars.myActivities = {Sunday:'rest', Monday:'rest', Tuesday:'rest', Wednesday:'rest', Thursday:'rest', Friday:'rest', Saturday:'rest'};
     for(i = 0; i < createVars.trainingDays.length; ++i) {
@@ -90,31 +89,36 @@ create.factory('createVars', function(){
   }
   createVars.programs = programs, createVars.createSchedule = createSchedule;
   return createVars;
->>>>>>> Made schedule load dynamically from program
 });
 
 create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedVars', 
   function($scope, $http, createVars, schedVars) {
-    console.log($scope.mileages);
     $scope.days = schedVars.days;
     $scope.mileages = createVars.mileages;
     $scope.selectedDays = createVars.selectedDays;
-    $scope.currentPace=createVars.currentPace;
-    $scope.achievedPace=createVars.achievedPace;
-    $scope.startDate=createVars.startDate;
-    $scope.raceDate=createVars.raceDate;
-    $scope.mileage=createVars.mileage;
+    $scope.currentPace = createVars.currentPace;
+    $scope.achievedPace = createVars.achievedPace;
+
+
+    $scope.dateToString = function(date){
+      if(date.getFullYear() == 1899) return "";
+      return (date.getMonth() + 1)+'/'+date.getDate()+'/'+(''+date.getFullYear()).substring(2);
+    };
+
+    $scope.startDate = $scope.dateToString(createVars.startDate);
+    $scope.raceDate = $scope.dateToString(createVars.endDate);
+    $scope.mileage = createVars.mileage;
     create = $scope;
     $scope.$on('$viewContentLoaded', function(){
       $scope.restrictDate($scope.startDate);
     });
-    
+
     $scope.update = function() {
       // console.log($scope);
       createVars.currentPace = $scope.currentPace;
       createVars.achievedPace = $scope.achievedPace;
-      createVars.startDate = $scope.startDate;
-      createVars.raceDate = $scope.raceDate;
+      createVars.startDate = new Date($scope.startDate);
+      createVars.endDate = new Date($scope.raceDate);
       createVars.selectedDays = $scope.selectedDays;
       createVars.mileage = $scope.mileage;
       // console.log(createVars);
