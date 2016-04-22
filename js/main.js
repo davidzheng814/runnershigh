@@ -17,16 +17,46 @@ main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailV
         });
     }
 
+    console.log(schedVars.currDayInfo);
 
     $scope.dayClicked = function(calendarDate) {
         //scan schedule until you see something with this date, then go to that page
         //or save the date in a variable and go to new page idk
         //comparison with getTime
-        console.log(calendarDate);
-        console.log(new Date(2016, 3, 19, 0))
-        console.log(calendarDate.getTime() == new Date(2016, 3, 19, 0).getTime())
-        window.location.href = "#main/day"
+        for(var i=0; i < schedVars.schedule.length; i++){
+            var x = schedVars.schedule[i];
+            if(x.date.getTime() == calendarDate.getTime()){
+                schedVars.currDayInfo = x;
+                console.log(schedVars.currDayInfo);
+                window.location.href = "#main/day"
+            }
+        }
     }
+  }]);
+
+main.config(function(calendarConfig){
+    calendarConfig.templates.calendarMonthView = 'customMonthView.html';
+    calendarConfig.templates.calendarMonthCell = 'customMonthCell.html';
+});
+
+
+
+
+main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVars', 'uiGmapIsReady',
+  function($scope, $http, userVars, schedVars, trailVars, uiGmapIsReady) {
+
+    if(!('currDayInfo' in schedVars)) {
+        schedVars.currDayInfo = {
+            activity:"running",
+            pace:7,
+            date: new Date(2016,4,9,0),
+            distance:24,
+            currTrail:"2"
+        } 
+      }
+
+    $scope.currDayInfo = schedVars.currDayInfo;
+    $scope.trailVars = trailVars;
 
     $scope.dateString = function(date) {
         var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -42,22 +72,8 @@ main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailV
             $scope.selectedEvent.pace = $scope.submittedPace;
         }
         $('#submitButton').text("Submitted!");
-        
     }
-  }]);
 
-main.config(function(calendarConfig){
-    calendarConfig.templates.calendarMonthView = 'customMonthView.html';
-    calendarConfig.templates.calendarMonthCell = 'customMonthCell.html';
-});
-
-
-
-
-
-
-main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVars', 'uiGmapIsReady',
-  function($scope, $http, userVars, schedVars, trailVars, uiGmapIsReady) {
 
 //----------------------------------- MAP STUFF ---------------------------------//
     $scope.mapconfig = trailVars.mapconfig;
