@@ -1,0 +1,77 @@
+<header id="nav" class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/">Runner's High</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+       
+      </ul>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="container" id="day-container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-info">
+
+        <div class="panel-heading selected-event-heading">{{dateString(selectedEvent.startsAt)}}</div>
+
+        <div class="panel-body selected-event">
+          <div style="margin-bottom: 30px;">
+            <span class="title">{{selectedEvent.activity}}</span>: Go for {{selectedEvent.distance}} miles at {{selectedEvent.pace}} min per mile.
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 text-right input-text">
+              Distance Ran:
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <input type="number" class="form-control" ng-model="submittedDistance" ng-value="selectedEvent.distance">
+                <span class="input-group-addon">mi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px">
+            <div class="col-md-6 text-right input-text">
+              Pace Ran:
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <input type="number" class="form-control" ng-model="submittedPace" ng-value="selectedEvent.pace">
+                <span class="input-group-addon">min/mi</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="text-center" style="margin: 10px">
+          <button class="btn btn-primary" id="submitButton" ng-click="submit()"> Submit </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div id="minimap-view">
+        <ui-gmap-google-map center='map.center' zoom='map.zoom' pan="true">
+          <ui-gmap-polygon path="selectedTrail.path" geodesic="mapconfig.geodesic" editable="mapconfig.editable" draggable="mapconfig.draggable" fit="mapconfig.fit" fill="mapconfig.fill", static="mapconfig.static", stroke="mapconfig.stroke">
+          </ui-gmap-polygon>
+          <ui-gmap-marker idKey="startLocId" coords="selectedTrail.startLoc"></ui-gmap-marker>
+        </ui-gmap-google-map>
+      </div>
+
+      <div class="text-center" style="margin-top: 15px">
+        <a class="btn btn-default" href="#trail"> Choose Trail</a>
+      </div>
+
+    </div>
+  </div>
+</div>

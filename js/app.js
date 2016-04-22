@@ -11,6 +11,7 @@ var app = angular.module('app', [
   'progress'
 ]);
 
+
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -37,6 +38,10 @@ app.config(['$routeProvider',
       when('/main', {
         templateUrl: 'partials/main.html',
         controller: 'MainCtrl'
+      }).
+      when('/main/day', {
+        templateUrl: 'partials/day.html',
+        controller: 'DayCtrl'
       }).
       when('/trail', {
         templateUrl: 'partials/trail.html',

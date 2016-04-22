@@ -1,212 +1,149 @@
-<body>
-
+<header id="nav" class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-    <h1 class="text-center" style="margin: 20px">{{ calendarTitle }}</h1>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/">Runner's High</a>
+    </div>
 
-    <div class="row">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+       
+      </ul>
+    </div>
+  </div>
+</header>
 
-      <div class="col-md-6" style="padding-left: 40px">
-        <div class="btn-group">
 
-          <button
-            class="btn btn-primary"
-            mwl-date-modifier
-            date="viewDate"
-            decrement="calendarView">
-            Previous
-          </button>
-          <button
-            class="btn btn-default"
-            mwl-date-modifier
-            date="viewDate"
-            set-to-today>
-            Today
-          </button>
-          <button
-            class="btn btn-primary"
-            mwl-date-modifier
-            date="viewDate"
-            increment="calendarView">
-            Next
-          </button>
-        </div>
-      </div>
 
-      <div class="col-md-6 text-right" style="padding-right: 40px">
-        <a
+<div class="container" id="main-container">
+
+  <h1 class="text-center" style="margin: 20px">{{ calendarTitle }}</h1>
+  <div class="row">
+    <div class="col-md-6" style="padding-left: 40px">
+      <div class="btn-group">
+      <!-- ALL THE BUTTONS -->
+        <button
           class="btn btn-primary"
-          href="#progress">
-          Progress Review
-        </a>
-      </div>
-
-    </div>
-
-    <br>
-
-    <div class="calendar">
-      <mwl-calendar
-        view="calendarView"
-        view-date="viewDate"
-        events="events"
-        on-view-change-click="viewChangeClicked(calendarNextView)"
-        on-event-click="eventClicked(calendarEvent)">
-      </mwl-calendar>
-    </div>
-
-    <br>
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-info">
-
-          <div class="panel-heading selected-event-heading">{{dateString(selectedEvent.startsAt)}}</div>
-
-          <div class="panel-body selected-event">
-            <div style="margin-bottom: 30px;">
-              <span class="title">{{selectedEvent.activity}}</span>: Go for {{selectedEvent.distance}} miles at {{selectedEvent.pace}} min per mile.
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 text-right input-text">
-                Distance Ran:
-              </div>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <input type="number" class="form-control" ng-model="submittedDistance" ng-value="selectedEvent.distance">
-                  <span class="input-group-addon">mi</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="row" style="margin-top: 10px">
-              <div class="col-md-6 text-right input-text">
-                Pace Ran:
-              </div>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <input type="number" class="form-control" ng-model="submittedPace" ng-value="selectedEvent.pace">
-                  <span class="input-group-addon">min/mi</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="text-center" style="margin: 10px">
-            <button class="btn btn-primary" id="submitButton" ng-click="submit()"> Submit </button>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div id="minimap-view">
-          <ui-gmap-google-map center='map.center' zoom='map.zoom' pan="true">
-            <ui-gmap-polygon path="selectedTrail.path" geodesic="mapconfig.geodesic" editable="mapconfig.editable" draggable="mapconfig.draggable" fit="mapconfig.fit" fill="mapconfig.fill", static="mapconfig.static", stroke="mapconfig.stroke">
-            </ui-gmap-polygon>
-            <ui-gmap-marker idKey="startLocId2" coords="selectedTrail.startLoc"></ui-gmap-marker>
-          </ui-gmap-google-map>
-        </div>
-
-        <div class="text-center" style="margin-top: 15px">
-          <a class="btn btn-default" href="#trail"> Choose Trail</a>
-        </div>
-
+          mwl-date-modifier
+          date="viewDate"
+          decrement="calendarView">
+          Previous Month
+        </button>
+        <button
+          class="btn btn-default"
+          mwl-date-modifier
+          date="viewDate"
+          set-to-today>
+          Today
+        </button>
+        <button
+          class="btn btn-primary"
+          mwl-date-modifier
+          date="viewDate"
+          increment="calendarView">
+          Next Month
+        </button>
       </div>
     </div>
-  </div>
-</body>
 
-
-
-<script id="customWeekView.html" type="text/ng-template">
-  <div class="cal-week-box" ng-class="{'cal-day-box': vm.showTimes}">
-  <div class="cal-row-fluid cal-row-head">
-
-    <div
-      class="cal-cell1"
-      ng-repeat="day in vm.view.days track by $index"
-      ng-class="{
-        'cal-day-weekend': day.isWeekend,
-        'cal-day-past': day.isPast,
-        'cal-day-today': day.isToday,
-        'cal-day-future': day.isFuture}"
-      mwl-element-dimensions="vm.dayColumnDimensions"
-      mwl-droppable
-      on-drop="vm.eventDropped(dropData.event, day.date)">
-
-      <span ng-bind="day.weekDayLabel"></span>
-      <br>
-      <small>
-        <span
-          data-cal-date
-          ng-click="vm.calendarCtrl.dateClicked(day.date)"
-          class="pointer"
-          ng-bind="day.dayLabel">
-        </span>
-      </small>
-
+    <div class="col-md-6 text-right" style="padding-right: 40px">
+      <a
+        class="btn btn-primary btn-success"
+        href="#progress">
+        Progress Review
+      </a>
     </div>
 
   </div>
 
-  <div class="cal-day-panel clearfix" ng-style="{height: vm.showTimes ? (vm.dayViewHeight + 'px') : 'auto'}">
+  <br>
 
-    <mwl-calendar-hour-list
-      day-view-start="vm.dayViewStart"
-      day-view-end="vm.dayViewEnd"
-      day-view-split="vm.dayViewSplit"
-      day-width="vm.dayColumnDimensions.width"
-      view-date="vm.viewDate"
-      on-timespan-click="vm.onTimespanClick"
-      ng-if="vm.showTimes">
-    </mwl-calendar-hour-list>
-
-    <div class="row">
-      <div class="col-xs-12">
-        <div
-          class="cal-row-fluid"
-          ng-repeat="event in vm.view.events track by event.$id"
-          style="position: absolute; width: 97.5%"> <!-- TODO: make this less hacky -->
-          <div
-            ng-class="'cal-cell' + (vm.showTimes ? 1 : event.daySpan) + (vm.showTimes ? '' : ' cal-offset' + event.dayOffset) + ' day-highlight dh-event-' + event.type + ' ' + event.cssClass"
-            ng-style="{
-              top: vm.showTimes ? ((event.top + 2) + 'px') : 'auto',
-              position: vm.showTimes ? 'absolute' : 'inherit',
-              width: vm.showTimes ? (vm.dayColumnDimensions.width + 'px') : '',
-              left: vm.showTimes ? (vm.dayColumnDimensions.width * event.dayOffset) + 15 + 'px' : ''
-            }"
-            mwl-draggable="event.draggable === true"
-            axis="vm.showTimes ? 'xy' : 'x'"
-            snap-grid="vm.showTimes ? {x: vm.dayColumnDimensions.width, y: 30} : {x: vm.dayColumnDimensions.width}"
-            on-drag="vm.tempTimeChanged(event, y)"
-            on-drag-end="vm.weekDragged(event, x, y)"
-            mwl-resizable="event.resizable === true && event.endsAt && !vm.showTimes"
-            resize-edges="{left: true, right: true}"
-            on-resize-end="vm.weekResized(event, edge, x)">
-            <strong ng-bind="(event.tempStartsAt || event.startsAt) | calendarDate:'time':true" ng-show="vm.showTimes"></strong>
-            <a
-              href="javascript:;"
-              ng-click="vm.onEventClick({calendarEvent: event})"
-              class="event-item"
-              uib-tooltip-html="event.title | calendarTrustAsHtml"
-              tooltip-placement="left"
-              tooltip-append-to-body="true"
-              style="text-decoration: none;">
-              <div class="calendar-entry">
-                <div class="title"> {{event.activity}} </div>
-                <div class="distance"> {{event.distance}} mi</div>
-                <div class="pace"> at {{event.pace}} min per mi</div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
+  <!-- THE CALENDAR -->
+  <mwl-calendar
+    view="calendarView"
+    view-date="viewDate"
+    view-title="calendarTitle"
+    events="events"
+    on-timespan-click="dayClicked(calendarDate)">
+  </mwl-calendar>
 </div>
 
+
+
+
+
+<script id="customMonthView.html" type="text/ng-template">
+  <div class="cal-row-fluid cal-row-head">
+
+    <div class="cal-cell1" ng-repeat="day in vm.weekDays track by $index" ng-bind="day"></div>
+
+  </div>
+  <div class="cal-month-box">
+
+    <div
+      ng-repeat="rowOffset in vm.monthOffsets track by rowOffset"
+      ng-mouseenter="rowHovered = true"
+      ng-mouseleave="rowHovered = false">
+      <div class="cal-row-fluid cal-before-eventlist">
+        <div
+          ng-repeat="day in vm.view | calendarLimitTo:7:rowOffset track by $index"
+          ng-init="dayIndex = vm.view.indexOf(day)"
+          class="cal-cell1 cal-cell {{ day.highlightClass }}"
+          ng-class="{pointer: day.events.length > 0}">
+          <ng-include src="vm.calendarConfig.templates.calendarMonthCell"></ng-include>
+        </div>
+      </div>
+
+      <mwl-calendar-slide-box
+      is-open="vm.openRowIndex === $index && vm.view[vm.openDayIndex].events.length > 0 && !vm.slideBoxDisabled"
+      events="vm.view[vm.openDayIndex].events"
+      on-event-click="vm.onEventClick"
+      edit-event-html="vm.editEventHtml"
+      on-edit-event-click="vm.onEditEventClick"
+      delete-event-html="vm.deleteEventHtml"
+      on-delete-event-click="vm.onDeleteEventClick">
+    </mwl-calendar-slide-box>
+
+    </div>
+
+  </div>
+</script>
+
+
+<script id="customMonthCell.html" type="text/ng-template">
+  <div
+    mwl-droppable
+    on-drop="vm.handleEventDrop(dropData.event, day.date, dropData.draggedFromDate)"
+    class="cal-month-day {{ day.cssClass }}"
+    ng-class="{
+      'cal-day-outmonth': !day.inMonth,
+      'cal-day-inmonth': day.inMonth,
+      'cal-day-weekend': day.isWeekend,
+      'cal-day-past': day.isPast,
+      'cal-day-today': day.isToday,
+      'cal-day-future': day.isFuture
+    }">
+
+    <span
+      class="pull-right date"
+      data-cal-date
+      ng-bind="day.label">
+    </span>
+
+    <div class="activity">
+      {{day.events[0].activity}}
+    </div>
+    <div class="distance" ng-show="day.events[0].activity != null && day.events[0].activity != 'rest'">
+      {{day.events[0].distance}} mi
+    </div>
+
+    <div class="pace" ng-show="day.events[0].activity == 'running' || day.events[0].activity == 'biking'">
+      at {{day.events[0].pace}} min / mi
+    </div>
+
+
+    <div id="cal-week-box" ng-if="$first && rowHovered">
+      <span ng-bind="vm.calendarConfig.i18nStrings.weekNumber.replace('{week}', day.date.clone().add(1, 'day').isoWeek())"></span>
+    </div>
+
+  </div>
 </script>
