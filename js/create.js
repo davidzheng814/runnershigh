@@ -4,9 +4,12 @@ create.factory('createVars', function(){
     return {};
 });
 
+var mileages = ["<5 miles","5-10 miles","10-15 miles",">15 miles"];
+
 create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedVars', 
   function($scope, $http, createVars, schedVars) {
     $scope.days = schedVars.days;
+    $scope.mileages = mileages;
     $scope.selectedDays = [];
 
     $scope.update = function() {
@@ -23,6 +26,7 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
         var index = $scope.selectedDays.indexOf(day);
         $scope.selectedDays.splice(index, 1);
         $(document.getElementsByName(day)).removeClass("ui-selected");
+        $(document.getElementsByName(day)).button('toggle');
       }
       else {
         $scope.selectedDays.push(day);

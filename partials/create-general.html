@@ -11,9 +11,19 @@
     </div>
   </div>
 </header>
-<div class="container" ng-app="create" ng-controller="CreateGeneralCtrl">
+<div class="container create-page-40" ng-app="create" ng-controller="CreateGeneralCtrl">
     <div id ="create1" class="panel panel-default">
         <div class="panel-body">
+            <div id="furthestmileage" class="dropdown">
+              <p>What is the furthest mileage you can run?</p>
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <!-- <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a> -->
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li ng-repeat="mileage in mileages">{{mileage}}</li>
+              </ul>
+            </div>
             <div id="currentpacequestion" class="question input-group">
                 <input class="form-control" name="currentpaceanswer" ng-model="currentPace" aria-describedby="basic-addon2" placeholder="Current Pace"/>
                 <span class="units input-group-addon" id="basic-addon2">min/mile</span>
@@ -23,14 +33,12 @@
                 <span class="units input-group-addon" id="basic-addon2">min/mile</span>
             </div>
             <div id="dates">
-                <input type="text" class="datepicker form-control" placeholder="Start Date" ng-model="startDate"/>
-                <input type="text" class="datepicker form-control" placeholder="Race Day" ng-model="raceDay"/>
+                <input type="text" class="datepicker form-control input-date" placeholder="Start Date" ng-model="startDate"/>
+                <input type="text" class="datepicker form-control input-date" placeholder="Race Day" ng-model="raceDay" style="float:right"/>
             </div>
             <div id="trainingdays">
                 <p>What days would you like to train?</p>
-                <ul class="list-group selectable pointer">
-                  <li ng-repeat="day in days" class="list-group-item" ng-click="selectDay(day)" name="{{day}}">{{day}}</li>
-                </ul>
+                <button ng-repeat="day in days" class="btn btn-default selectable pointer" ng-click="selectDay(day)" name="{{day}}">{{day}}</button>
             </div>
             <div class="navigate">
               <form>
@@ -49,4 +57,5 @@ $( document ).ready(function() {
   //     e.metaKey = true;
   //   }).selectable();
 });
+
 </script>

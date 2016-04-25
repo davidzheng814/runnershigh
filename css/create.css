@@ -55,3 +55,31 @@
     float: left;
     margin-right: 15px;
 }
+
+.create-page-70 {
+    width: 70% !important;
+}
+
+.create-page-40 {
+    width: 45% !important;
+}
+
+#programs > thead > tr > th, #programs > tbody > tr > th, #programs > tfoot > tr > th, 
+#programs > thead > tr > td, #programs > tbody > tr > td, #programs > tfoot > tr > td {
+    padding-right: 40px !important;
+    padding-left: 40px !important;
+}
+
+.input-date {
+    width: 255px !important;
+    /*margin-right: 50px !important;*/
+}
+
+#trainingdays button {
+    width: 10%;
+    text-align: center;
+    border-radius: 8px;
+    margin-right: 4%;
+    margin-bottom: 30px;
+    outline: none;
+}
