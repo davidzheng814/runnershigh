@@ -14,16 +14,15 @@
 <div class="container create-page-40" ng-app="create" ng-controller="CreateGeneralCtrl">
     <div id ="create1" class="panel panel-default">
         <div class="panel-body">
-            <div id="furthestmileage" class="dropdown">
+            <div id="furthestmileage">
               <p>What is the furthest mileage you can run?</p>
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <!-- <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a> -->
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li ng-repeat="mileage in mileages">{{mileage}}</li>
-              </ul>
             </div>
+            <ol class="nya-bs-select" id="mileage-dropdown" title="Select range..." ng-model="mileage">
+              <li ng-repeat="option in mileages" data-value="{{option}}" class="nya-bs-option">
+                <a> {{option}} </a>
+              </li>
+            </ol>
+
             <div id="currentpacequestion" class="question input-group">
                 <input class="form-control" name="currentpaceanswer" ng-model="currentPace" aria-describedby="basic-addon2" placeholder="Current Pace"/>
                 <span class="units input-group-addon" id="basic-addon2">min/mile</span>

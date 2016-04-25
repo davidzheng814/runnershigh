@@ -1,4 +1,4 @@
-var create = angular.module('create', []);
+var create = angular.module('create', ['nya.bootstrap.select']);
 
 create.factory('createVars', function(){
     return {};
@@ -11,7 +11,8 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
     $scope.days = schedVars.days;
     $scope.mileages = mileages;
     $scope.selectedDays = [];
-
+    create = $scope;
+    
     $scope.update = function() {
       createVars.currentPace = $scope.currentPace;
       createVars.achievedPace = $scope.achievedPace;
