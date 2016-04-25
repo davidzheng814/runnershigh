@@ -60,6 +60,19 @@
     margin-right: 15px;
 }
 
+#create-finished {
+    margin:80px auto;
+    width:60vw;
+    height:300px;
+}
+
+#create-finished .panel-body {
+    margin:auto;
+    text-align:center;
+}
+
+#create-finished .panel-body {
+}
 .create-page-70 {
     width: 70% !important;
 }
