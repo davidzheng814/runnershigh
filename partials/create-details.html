@@ -19,16 +19,23 @@
   </div>
 </header>
 <div class="container create-page-70">
-    <div id ="create1" class="panel panel-default">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-xs-4">
-            <div id="activities" class="panel panel-info">
-              <div class="panel-heading">
+  <div id ="create1">
+    <ol class="breadcrumb" style="margin-bottom: 5px;">
+      <li><a href="#create/general/">Your Running</a></li>
+      <li><a href="#create/programs/">Suggested Progams</a></li>
+      <li class="active">Full Schedule</li>
+    </ol>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-4">
+          <div id="activities" class="panel panel-info">
+            <div class="panel-heading">
               <h3 class="panel-title">Activities</h3>
             </div>
             <div class="panel-body">
-                <table id="activitiestable" class="table">
+              <table id="activitiestable" class="table">
                 <tbody>
                   <tr ng-repeat="day in days">
                     <td>
@@ -46,24 +53,24 @@
               </table>
             </div>
           </div>
-          </div>
-          <div class="col-xs-8">
-            <div id="trainingstyle" class="panel panel-info">
-              <div class="panel-heading">
+        </div>
+        <div class="col-xs-8">
+          <div id="trainingstyle" class="panel panel-info">
+            <div class="panel-heading">
               <h3 class="panel-title">Program Overview</h3>
             </div>
             <div class="panel-body">
-                <highchart id="schedule-chart" config="optionsConfig"></highchart>
-              </div>
+              <highchart id="schedule-chart" config="optionsConfig"></highchart>
             </div>
+          </div>
         </div>
         <div class="col-xs-12">
-            <div id="schedulepanel" class="panel panel-info">
-              <div class="panel-heading">
+          <div id="schedulepanel" class="panel panel-info">
+            <div class="panel-heading">
               <h3 class="panel-title">Schedule</h3>
             </div>
             <table class="table" id="schedule">
-                <thead>
+              <thead>
                 <tr>
                   <th>Week</th>
                   <th>Max Mileage</th>
@@ -76,8 +83,7 @@
                   <td>{{week.date | weekRange}}</td>
                   <td>{{week.sched | maxMileage}}</td>
                   <td>{{week.sched | formatMinPace}} min/mi</td>
-                  <td><button class="glyphicon glyphicon-info-sign scheduleinfo" aria-hidden="true" 
-                        ng-click="showWeek(week)"></button></td>
+                  <td><button class="glyphicon glyphicon-info-sign scheduleinfo" aria-hidden="true" ng-click="showWeek(week)"></button></td>
                 </tr>
                 <tr ng-repeat-end ng-show="week.show">
                   <td colspan="4">

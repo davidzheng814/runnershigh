@@ -64,8 +64,12 @@
     width: 70% !important;
 }
 
-.create-page-40 {
+.create-page-45 {
     width: 45% !important;
+}
+
+.create-page-50 {
+    width: 50% !important;
 }
 
 #programs > thead > tr > th, #programs > tbody > tr > th, #programs > tfoot > tr > th, 
@@ -86,4 +90,17 @@
     margin-right: 4%;
     margin-bottom: 30px;
     outline: none;
+}
+
+#no-continue {
+    margin-top: 30px;
+    display: none;
+}
+
+.active {
+    color: black !important;
+}
+
+.inactive {
+    color: grey;
 }

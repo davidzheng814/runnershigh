@@ -4,7 +4,7 @@ create.factory('createVars', function(){
     return {};
 });
 
-var mileages = ["<5 miles","5-10 miles","10-15 miles",">15 miles"];
+var mileages = [" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"];
 
 create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedVars', 
   function($scope, $http, createVars, schedVars) {
@@ -17,8 +17,9 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
       createVars.currentPace = $scope.currentPace;
       createVars.achievedPace = $scope.achievedPace;
       createVars.startDate = $scope.startDate;
-      createVars.raceDay = $scope.raceDay;
+      createVars.raceDate = $scope.raceDate;
       createVars.selectedDays = $scope.selectedDays;
+      createVars.mileage = $scope.mileage;
       window.location.href = "#create/programs";
     }
 
@@ -43,15 +44,32 @@ create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars',
         "name" : "Waitz",
         "difficulty" : 4,
         "description" : ["Running every day",
-              "Alternate easy and hard runs",
-              "No cross-training"]
+                         "Alternate easy and hard runs",
+                         "Builds long run to 20 miles",
+                         "No cross-training"]
       },
       "first" : {
         "name" : "FIRST",
-        "difficulty" : 2,
+        "difficulty" : 3,
         "description" : ["1 rest day",
-              "Alternate running and cross-training",
-              "Builds long run to 20 miles"]
+                         "Alternate running and cross-training",
+                         "Builds long run to 20 miles"]
+      },
+      "active" : {
+        "name" : "ACTIVE",
+        "difficulty" : 2,
+        "description" : ["2 rest days",
+                         "Builds running up throughout the week",
+                         "Builds long run to 23 miles",
+                         "No cross-training"]
+      },
+      "deathrun" : {
+        "name" : "Death Run",
+        "difficulty" : 5,
+        "description" : ["Running every day",
+                         "Run 15+ miles every day",
+                         "Builds long run to 30 miles",
+                         "No cross-training"]
       }
     };
     $scope.own = {
@@ -62,8 +80,13 @@ create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars',
     $scope.range = new Array(5);
 
     $scope.update = function() {
-      createVars.program = $scope.program;
-      window.location.href = "#create/details";
+      if ($scope.program===undefined) {
+        $("#no-continue")[0].style.display = "block";
+      }
+      else {
+        createVars.program = $scope.program;
+        window.location.href = "#create/details";
+      }
     }
 
     $scope.selectProgram = function(program) {
