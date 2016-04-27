@@ -1,39 +1,54 @@
 var create = angular.module('create', ['nya.bootstrap.select']);
 
 create.factory('createVars', function(){
-    return {};
+  var selectedDays = [];
+  var currentPace = "";
+  var achievedPace = "";
+  var startDate = "";
+  var raceDate = "";
+  var mileage = 0;
+  var mileages = [" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"];
+  return {selectedDays:selectedDays,currentPace:currentPace,achievedPace:achievedPace,startDate:startDate,raceDate:raceDate,mileage:mileage};
 });
-
-var mileages = [" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"];
 
 create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedVars', 
   function($scope, $http, createVars, schedVars) {
+    // console.log(createVars);
     $scope.days = schedVars.days;
-    $scope.mileages = mileages;
-    $scope.selectedDays = [];
+    $scope.mileages = createVars.mileages;
+    $scope.selectedDays = createVars.selectedDays;
+    $scope.currentPace=createVars.currentPace;
+    $scope.achievedPace=createVars.achievedPace;
+    $scope.startDate=createVars.startDate;
+    $scope.raceDate=createVars.raceDate;
+    $scope.mileage=createVars.mileage;
     create = $scope;
     
     $scope.update = function() {
+      // console.log($scope);
       createVars.currentPace = $scope.currentPace;
       createVars.achievedPace = $scope.achievedPace;
       createVars.startDate = $scope.startDate;
       createVars.raceDate = $scope.raceDate;
       createVars.selectedDays = $scope.selectedDays;
       createVars.mileage = $scope.mileage;
+      // console.log(createVars);
       window.location.href = "#create/programs";
+      console.log(createVars);
     }
 
     $scope.selectDay = function(day) {
       if ($scope.selectedDays.indexOf(day) > -1) {
         var index = $scope.selectedDays.indexOf(day);
         $scope.selectedDays.splice(index, 1);
-        $(document.getElementsByName(day)).removeClass("ui-selected");
-        $(document.getElementsByName(day)).button('toggle');
       }
       else {
         $scope.selectedDays.push(day);
-        $(document.getElementsByName(day)).addClass("ui-selected");
       }
+    }
+
+    $scope.isSelectedDay = function(day) {
+      return ($scope.selectedDays.indexOf(day) > -1) 
     }
   }]);
 
@@ -78,6 +93,12 @@ create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars',
         "description" : []
       };
     $scope.range = new Array(5);
+
+    $scope.back = function() {
+      console.log(createVars);
+      window.location.href = "#create/general";
+      console.log(createVars);
+    }
 
     $scope.update = function() {
       if ($scope.program===undefined) {

@@ -52,7 +52,7 @@
       </div>
       <div id="trainingdays">
         <p>What days would you like to train?</p>
-        <button ng-repeat="day in days" class="btn btn-default selectable pointer" ng-click="selectDay(day)" name="{{day}}">{{day}}</button>
+        <button ng-repeat="day in days" class="btn btn-default selectable pointer" ng-click="selectDay(day)" name="{{day}}" ng-class="{highlight:isSelectedDay(day)}">{{day}}</button>
       </div>
       <div class="navigate">
         <form>
@@ -65,6 +65,8 @@
 <script>
 $( document ).ready(function() {
   $(function() {
+    console.log($('#startdate'));
+    console.log($('#racedate'));
     $('#startdate').datepicker({ minDate: 0, onSelect: function(dateStr) {
       var date = $(this).datepicker('getDate');
       if (date) {
@@ -73,6 +75,7 @@ $( document ).ready(function() {
       $('#racedate').datepicker('option', 'defaultDate', date);
       $('#racedate').datepicker('option', 'minDate', date);
     }});
+    // $('#startdate').datepicker();
     $('#racedate').datepicker();
   });
 });
