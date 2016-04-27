@@ -47,7 +47,7 @@
         </div>
       </div>
       <div id="dates">
-        <input id="startdate" type="text" class="datepicker form-control input-date" placeholder="Start Date" ng-model="startDate"/>
+        <input id="startdate" type="text" class="datepicker form-control input-date" placeholder="Start Date" ng-model="startDate" ng-change="restrictDate(startDate)"/>
         <input id="racedate" type="text" class="datepicker form-control input-date" placeholder="Race Date" ng-model="raceDate" style="float:right"/>
       </div>
       <div id="trainingdays">
@@ -64,20 +64,10 @@
 </div>
 <script>
 $( document ).ready(function() {
-  $(function() {
-    console.log($('#startdate'));
-    console.log($('#racedate'));
-    $('#startdate').datepicker({ minDate: 0, onSelect: function(dateStr) {
-      var date = $(this).datepicker('getDate');
-      if (date) {
-        date.setDate(date.getDate() + 1);
-      }
-      $('#racedate').datepicker('option', 'defaultDate', date);
-      $('#racedate').datepicker('option', 'minDate', date);
-    }});
-    // $('#startdate').datepicker();
-    $('#racedate').datepicker();
+  $('#startdate').datepicker({ 
+    minDate: 0
   });
+  $('#racedate').datepicker();
 });
 
 </script>

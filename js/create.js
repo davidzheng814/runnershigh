@@ -47,6 +47,15 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
       }
     }
 
+    $scope.restrictDate = function(startDate) {
+      var date = new Date(startDate);
+      if (date) {
+        date.setDate(date.getDate() + 1);
+      }
+      $('#racedate').datepicker('option', 'defaultDate', date);
+      $('#racedate').datepicker('option', 'minDate', date);
+    }
+
     $scope.isSelectedDay = function(day) {
       return ($scope.selectedDays.indexOf(day) > -1) 
     }
