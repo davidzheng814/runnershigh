@@ -90,6 +90,8 @@
     margin-right: 4%;
     margin-bottom: 30px;
     outline: none;
+    padding-left:0px;
+    padding-right:0px;
 }
 
 #no-continue {
