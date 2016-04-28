@@ -126,7 +126,7 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
         var PADDING = .001;
         $scope.map.zoom = $scope.getBoundsZoomLevel(least_lat - PADDING, least_lng - PADDING, most_lat + PADDING, most_lng + PADDING, {height:$('#minimap-view .angular-google-map-container').height(),width:$('#minimap-view .angular-google-map-container').width()});
       }
-
+      
       $scope.resizeMap();
 
       $scope.newValue = function(newValue){
