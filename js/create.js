@@ -6,14 +6,14 @@ create.factory('createVars', function(){
   var achievedPace = "";
   var startDate = "";
   var raceDate = "";
-  var mileage = 0;
+  var mileage = "";
   var mileages = [" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"];
-  return {selectedDays:selectedDays,currentPace:currentPace,achievedPace:achievedPace,startDate:startDate,raceDate:raceDate,mileage:mileage};
+  return {selectedDays:selectedDays,currentPace:currentPace,achievedPace:achievedPace,startDate:startDate,raceDate:raceDate,mileage:mileage,mileages:mileages};
 });
 
 create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedVars', 
   function($scope, $http, createVars, schedVars) {
-    // console.log(createVars);
+    console.log($scope.mileages);
     $scope.days = schedVars.days;
     $scope.mileages = createVars.mileages;
     $scope.selectedDays = createVars.selectedDays;
@@ -23,6 +23,9 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
     $scope.raceDate=createVars.raceDate;
     $scope.mileage=createVars.mileage;
     create = $scope;
+    $scope.$on('$viewContentLoaded', function(){
+      $scope.restrictDate($scope.startDate);
+    });
     
     $scope.update = function() {
       // console.log($scope);
