@@ -229,7 +229,7 @@ create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars',
 create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 'schedVars', 
   function($scope, $routeParams, createVars, schedVars) {
     create = $scope;
-    $scope.days = schedVars.days;
+    $scope.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     createVars.createSchedule(schedVars.schedule);
     // createVars.myActivities = {Sunday:'rest', Monday:'rest', Tuesday:'rest', Wednesday:'running', 
     //                            Thursday:'running',Friday:'running', Saturday:'running'};
