@@ -18,17 +18,37 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
       $scope.myMileages.push([$scope.myProgress[i].date.getTime(), $scope.myProgress[i].distance]);
       $scope.myPaces.push([$scope.myProgress[i].date.getTime(), $scope.myProgress[i].pace]);
     }
-    
+    justChanged = false;
     $scope.optionsConfig = {
         options: {
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
+                animation:false,
             },
             title: {
-                text: 'My Progress'
+                text: 'My Progress',
+                style: {
+                  'font-size':'22px'
+                }
             },
             subtitle: {
-                text: 'Click and drag to zoom in'
+              text: 'Click and drag to zoom',
+                style: {
+                  'font-size':'16px'
+                }
+            },
+            legend: {
+              title: {
+                text: '<span style="color:white">AAAAAAAAAAAA</span><span style="font-size:18px">Select Mileage or Pace below:</span>'
+              }, 
+              labelFormatter: function(){
+                var series = this.name.substring(5);
+                return 'My '+series+' and Goal '+series;
+              }, 
+              itemStyle: {
+                'font-size':'16px',
+                'font-weight':'bold'
+              }
             },
             xAxis: {
               type:'datetime',
@@ -56,7 +76,6 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
                 }
               }
             }, { 
-                opposite: true, 
                 labels: {
                   formatter: function(){
                     return Math.floor(this.value) + ":" + ("0" + Math.round(60*(this.value - Math.floor(this.value)))).slice(-2) + ' min/mi'
@@ -72,7 +91,8 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
                       'font-size':'20px',
                       color:'#388948'
                     } // 7CB5EC
-                }
+                }, 
+                visible:false
             }],
             tooltip: {
               shared:true,
@@ -88,7 +108,43 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
           color:'#7CB5EC',
           tooltip: {
             valueSuffix:' mi'
-          }
+          }, 
+          events: {
+            show: function(e) {
+              if(justChanged) {
+                justChanged = false;
+                return;
+              }
+              justChanged = true;
+              this.chart.series[1].show();
+              this.chart.series[2].hide();
+              this.chart.series[3].hide();
+              this.chart.yAxis[0].update({
+                  visible: true
+              });
+              this.chart.yAxis[1].update({
+                  visible: false
+              });
+            }, 
+            hide: function(e) {
+              if(justChanged) {
+                justChanged = false;
+                return;
+              }
+              justChanged = true;
+              this.chart.series[1].hide();
+              this.chart.series[2].show();
+              this.chart.series[3].show();
+              this.chart.yAxis[1].update({
+                  visible: true
+              });
+              this.chart.yAxis[0].update({
+                  visible: false
+              });
+            }
+          }, 
+          animation:false,
+
         }, {
           name: 'My Mileage', 
           type: 'line', 
@@ -98,7 +154,9 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
           lineWidth:3,
           tooltip: {
             valueSuffix:' mi'
-          }
+          }, 
+          showInLegend: false,
+          animation:false
         }, {
           name: 'Goal Pace', 
           type: 'line', 
@@ -112,7 +170,43 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
               var color = "#65D470";
               return '<span style="color:'+color+'">\u25CF</span> Goal Pace: <b>'+yFormat+' min/mi</b><br/>';
             }
-          }
+          }, 
+          events: {
+            show: function(e) {
+              if(justChanged) {
+                justChanged = false;
+                return;
+              }
+              justChanged = true;
+              this.chart.series[3].show();
+              this.chart.series[0].hide();
+              this.chart.series[1].hide();
+              this.chart.yAxis[1].update({
+                  visible: true
+              });
+              this.chart.yAxis[0].update({
+                  visible: false
+              });
+            }, 
+            hide: function(e) {
+              if(justChanged) {
+                justChanged = false;
+                return;
+              }
+              justChanged = true;
+              this.chart.series[3].hide();
+              this.chart.series[0].show();
+              this.chart.series[1].show();
+              this.chart.yAxis[0].update({
+                  visible: true
+              });
+              this.chart.yAxis[1].update({
+                  visible: false
+              });
+            }
+          }, 
+          visible:false,
+          animation:false
         }, {
           name: 'My Pace', 
           type: 'line', 
@@ -127,7 +221,10 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
               var color = "#016B0C";
               return '<span style="color:'+color+'">\u25CF</span> My Pace: <b>'+yFormat+' min/mi</b><br/>';
             }
-          }
+          }, 
+          visible:false,
+          showInLegend: false,
+          animation:false
         }]
     };
 }]);
