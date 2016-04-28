@@ -53,7 +53,6 @@ create.factory('createVars', function(){
   createVars.trainingDays = ['Monday', 'Wednesday', 'Friday'];
   var createSchedule = function(schedule){
     schedule.length = 0;
-    console.log(createVars);
     var program = programs[createVars.programId];
     createVars.myActivities = {Sunday:'rest', Monday:'rest', Tuesday:'rest', Wednesday:'rest', Thursday:'rest', Friday:'rest', Saturday:'rest'};
     for(i = 0; i < createVars.trainingDays.length; ++i) {
@@ -123,7 +122,6 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
       createVars.mileage = $scope.mileage;
       // console.log(createVars);
       window.location.href = "#create/programs";
-      console.log(createVars);
     }
 
     $scope.selectDay = function(day) {
@@ -193,9 +191,7 @@ create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars',
     $scope.range = new Array(5);
 
     $scope.back = function() {
-      console.log(createVars);
       window.location.href = "#create/general";
-      console.log(createVars);
     }
 
     $scope.update = function() {
@@ -374,7 +370,8 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
     $scope.optionsConfig = {
       options: {
           chart: {
-              zoomType: 'x'
+              zoomType: 'x',
+              height:290
           },
           title: {
               text: ''

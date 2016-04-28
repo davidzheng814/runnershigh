@@ -1,65 +1,67 @@
-<header id="nav" class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#/">Runner's High</a>
-    </div>
+<div class="create-background">
+    <header id="nav" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#/">Runner's High</a>
+        </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-       
-      </ul>
-    </div>
-  </div>
-</header>
-<div class="container create-page-50" ng-app="create" ng-controller="CreateProgramsCtrl">
-  <div id ="create1">
-    <ol class="breadcrumb" style="margin-bottom: 5px;">
-      <li><a href="#create/general/">Your Running</a></li>
-      <li class="active">Suggested Progams</li>
-      <li class="inactive">Full Schedule</li>
-    </ol>
-  </div>
-  <div class="panel panel-info">
-  	<div class="panel-heading">
-      <h3 class="panel-title">Suggested Programs</h3>
-    </div>
-		
-		<div class="panel-body">
-			<table class="table" id="programs">
-		    <thead>
-				<tr>
-					<th>Name</th>
-					<th>Difficulty</th>
-					<th>Description</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="program in programs" class="pointer" ng-click="selectProgram(program)" name={{program.name}}>
-					<td>{{program.name}}</td>
-					<td><span class="glyphicon glyphicon-star" ng-repeat="i in range.slice(0,program.difficulty) track by $index"/><span class="glyphicon glyphicon-star-empty" ng-repeat="i in range.slice(0,5-program.difficulty) track by $index"/></td>
-					<td>
-						<ul>
-							<li ng-repeat="bullet in program.description">{{bullet}}</li>
-						</ul>
-					</td>
-				</tr>
-				<tr class="pointer" ng-click="createProgram()" name="Own">
-					<td colspan="3">Create your own</td>
-				</tr>
-			</tbody>
-		</table>
-			<div class="navigate">
-		    <form>
-		      <input type="submit" class="btn btn-default" value="Back" ng-click="back()">
-		    </form>
-	      <form>
-	        <input type="submit" class="btn btn-default" value="Continue" ng-click="update()">
-        </form>
-		    <br class="clearFloat">
-        <div id="no-continue" class="alert alert-danger">
-          You must select a program before continuing!
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+           
+          </ul>
         </div>
       </div>
-		</div>
-	</div>
+    </header>
+    <div class="container create-page-50" ng-app="create" ng-controller="CreateProgramsCtrl">
+      <div id ="create1">
+        <ol class="breadcrumb" style="margin-bottom: 5px;">
+          <li><a href="#create/general/">Your Running</a></li>
+          <li class="active">Suggested Progams</li>
+          <li class="inactive">Full Schedule</li>
+        </ol>
+      </div>
+      <div class="panel panel-info">
+      	<div class="panel-heading">
+          <h3 class="panel-title">Suggested Programs</h3>
+        </div>
+    		
+    		<div class="panel-body">
+    			<table class="table" id="programs">
+    		    <thead>
+    				<tr>
+    					<th>Name</th>
+    					<th>Difficulty</th>
+    					<th>Description</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<tr ng-repeat="program in programs" class="pointer" ng-click="selectProgram(program)" name={{program.name}}>
+    					<td>{{program.name}}</td>
+    					<td><span class="glyphicon glyphicon-star" ng-repeat="i in range.slice(0,program.difficulty) track by $index"/><span class="glyphicon glyphicon-star-empty" ng-repeat="i in range.slice(0,5-program.difficulty) track by $index"/></td>
+    					<td>
+    						<ul>
+    							<li ng-repeat="bullet in program.description">{{bullet}}</li>
+    						</ul>
+    					</td>
+    				</tr>
+    				<tr class="pointer" ng-click="createProgram()" name="Own">
+    					<td colspan="3">Create your own</td>
+    				</tr>
+    			</tbody>
+    		</table>
+    			<div class="navigate">
+    		    <form>
+    		      <input type="submit" class="btn btn-default" value="Back" ng-click="back()">
+    		    </form>
+    	      <form>
+    	        <input type="submit" class="btn btn-default" value="Continue" ng-click="update()">
+            </form>
+    		    <br class="clearFloat">
+            <div id="no-continue" class="alert alert-danger">
+              You must select a program before continuing!
+            </div>
+          </div>
+    		</div>
+    	</div>
+    </div>
 </div>

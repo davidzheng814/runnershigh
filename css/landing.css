@@ -18,7 +18,7 @@
 }
 
 #banner {
-  background-color: rgb(255, 157, 43);
+  background-color: #3399ff;
   width: 100%;
   min-height: 600px;
   margin: 0px;
@@ -47,9 +47,19 @@
 
 #banner #get-started .btn {
   color:white;
-  background-color:rgb(106, 103, 206);
+  background-color:#0062D8;
   font-size:18px;
-  border-color:rgb(106, 103, 206);
+  border-color:#004599;
   width:200px;
   height:50px;
+}
+
+footer {
+  text-align:center;
+}
+
+footer > #footer-text {
+  margin-top:4vh;
+  font-size:15px;
+  color:#606060;
 }
