@@ -77,19 +77,23 @@
     float: left;
     margin-right: 15px;
     margin-left:15px;
-    height:350px;
+    height:420px;
+}
+
+.day-label {
+    padding-top:16px !important;
 }
 
 #trainingstyle {
-    width:520px;
+    width:620px;
     float:left;
     margin-left:0px;
-    height:350px;
+    height:420px;
 }
 
 #schedulepanel {
     clear:both;
-    width:835px;
+    width:935px;
     margin-left:15px;
 }
 
@@ -117,7 +121,7 @@
 #create-finished .panel-body {
 }
 .create-page-70 {
-    width: 900px;
+    width: 1000px;
 }
 
 .create-general {
@@ -189,7 +193,7 @@
 }
 
 #no-continue, #pace-error, #missing-pace-error {
-    margin-top: 30px;
+    margin-top: 0px;
     display: none;
 }
 
@@ -202,26 +206,15 @@
 }
 
 #activity-dropdown {
-    height: 20px !important;
-    width: 110px !important;
+    width: 150px;
 }
 
 #activitiestable tr {
-    height: 30px !important;
-}
-
-#activitiestable ol button {
-    height: 20px !important;
-    padding: 0px !important;
-    font-size: 10px !important;
+    height: 52px;
 }
 
 #activitiestable ol button span {
     margin-left: 5px !important;
-}
-
-.dropdown-menu ul {
-    font-size: 10px !important;
 }
 
 #day-by-day tr {

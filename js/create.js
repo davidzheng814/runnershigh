@@ -384,7 +384,7 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
       options: {
           chart: {
               zoomType: 'x',
-              height:290
+              height:360
           },
           title: {
               text: ''
