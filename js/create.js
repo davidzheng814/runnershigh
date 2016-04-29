@@ -122,17 +122,6 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
     $scope.update = function() {
       createVars.currentPace = $scope.currentPace;
       createVars.achievedPace = $scope.achievedPace;
-      var re = /^\d\d?\:\d\d$/;
-      if (createVars.currentPace=="" || createVars.achievedPace=="") {
-        $("#missing-pace-error")[0].style.display = "block";
-        $("#pace-error")[0].style.display = "none";
-        return;
-      }
-      else if (createVars.currentPace.match(re)==null || createVars.achievedPace.match(re)==null) {
-        $("#pace-error")[0].style.display = "block";
-        $("#missing-pace-error")[0].style.display = "none";
-        return;
-      }
       if ($scope.startDate=="") {
         createVars.startDate = new Date(0, 0, 0);
       }
@@ -147,6 +136,32 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
       }
       createVars.selectedDays = $scope.selectedDays;
       createVars.mileage = $scope.mileage;
+      var re = /^\d\d?\:\d\d$/;
+      if (createVars.currentPace=="" || createVars.achievedPace=="" ||
+          createVars.startDate.getTime()==new Date(0,0,0).getTime() || createVars.raceDate.getTime()==new Date(0,0,0).getTime() ||
+          createVars.selectedDays.length==0 || createVars.mileage=="") {
+        $("#missing-info")[0].style.display = "block";
+        if ((createVars.currentPace.match(re)==null && createVars.currentPace!="") || 
+            (createVars.achievedPace.match(re)==null && createVars.achievedPace!="") ||
+            (parseInt(createVars.currentPace.slice(-2),10)>=60) ||
+            (parseInt(createVars.achievedPace.slice(-2),10)>=60)) {
+          $("#pace-error")[0].style.display = "block";
+        }
+        else {
+          $("#pace-error")[0].style.display = "none";
+        }
+        return;
+      }
+      else {
+        if ((createVars.currentPace.match(re)==null && createVars.currentPace!="") || 
+            (createVars.achievedPace.match(re)==null && createVars.achievedPace!="") ||
+            (parseInt(createVars.currentPace.slice(-2),10)>=60) ||
+            (parseInt(createVars.achievedPace.slice(-2),10)>=60)) {
+          $("#pace-error")[0].style.display = "block";
+          return;
+        }
+        $("#missing-info")[0].style.display = "none";
+      }
       window.location.href = "#create/programs";
     }
 
