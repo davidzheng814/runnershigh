@@ -17,8 +17,6 @@ main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailV
         });
     }
 
-    console.log(schedVars.currDayInfo);
-
     $scope.dayClicked = function(calendarDate) {
         //scan schedule until you see something with this date, then go to that page
         //or save the date in a variable and go to new page idk
@@ -27,7 +25,6 @@ main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailV
             var x = schedVars.schedule[i];
             if(x.date.getTime() == calendarDate.getTime()){
                 schedVars.currDayInfo = x;
-                console.log(schedVars.currDayInfo);
                 window.location.href = "#main/day"
             }
         }
@@ -44,16 +41,6 @@ main.config(function(calendarConfig){
 
 main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVars', 'uiGmapIsReady',
   function($scope, $http, userVars, schedVars, trailVars, uiGmapIsReady) {
-
-    if(!('currDayInfo' in schedVars)) {
-        schedVars.currDayInfo = {
-            activity:"running",
-            pace:7,
-            date: new Date(2016,4,9,0),
-            distance:24,
-            currTrail:"2"
-        } 
-      }
 
     $scope.currDayInfo = schedVars.currDayInfo;
     $scope.trailVars = trailVars;

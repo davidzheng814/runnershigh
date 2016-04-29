@@ -51,7 +51,9 @@ landing.factory('schedVars', function(){
     var activities = ['running', 'swimming', 'biking', 'rowing', 'rest'];
     // var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-    return {schedule:schedule, activities:activities, myProgress:myProgress, days:days};
+    var schedVars = {schedule:schedule, activities:activities, myProgress:myProgress, days:days};
+    window.schedVars = schedVars;
+    return schedVars;
 });
 
 landing.controller('LandingCtrl', ['$scope', '$http',  

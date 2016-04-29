@@ -93,6 +93,7 @@ create.factory('createVars', function(){
     }
   }
   createVars.programs = programs, createVars.createSchedule = createSchedule;
+  window.createVars = createVars;
   return createVars;
 });
 
@@ -474,7 +475,21 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
 
 create.controller('CreateFinishedCtrl', ['$scope', '$routeParams', 'createVars', 'trailVars', 'schedVars',
   function($scope, $routeParams, createVars, trailVars, schedVars) {
-
+    function addTrails(){
+      for(day of schedVars.schedule) {
+        if(day.activity != 'running' && day.activity != 'biking') continue;
+        var closest = null;
+        var diff = 0;
+        for(trail of trailVars.trails) {
+          if(closest == null || Math.abs(trail.distance - day.distance) < diff) {
+            closest = trail;
+            diff = Math.abs(trail.distance - day.distance);
+          }
+        }
+        day.currTrail = closest.id;
+      }
+    }
+    addTrails();
   }]);
 
 create.filter('capitalize', function() {
