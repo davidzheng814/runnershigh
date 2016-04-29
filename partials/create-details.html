@@ -22,11 +22,14 @@
     <div id ="create1">
       <ol class="breadcrumb" style="margin-bottom: 5px;">
         <li><a href="#create/general/">About You</a></li>
-        <li><a href="#create/programs/">Suggested Progams</a></li>
+        <li><a href="#create/programs/">Select a Progam!</a></li>
         <li class="active">Full Schedule</li>
       </ol>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Full Schedule</h3>
+      </div>
       <div class="panel-body">
         <div class="row">
             <div id="activities" class="panel panel-info">
@@ -41,11 +44,11 @@
                         {{day}}
                       </td>
                       <td>
-                        <select ng-model="myActivities[day]">
-                          <option ng-repeat="activity in activities" value="{{activity}}">
-                            {{activity | capitalize}}
-                          </option>
-                        </select>
+                        <ol class="nya-bs-select" id="activity-dropdown" title="" ng-model="myActivities[day]">
+                          <li ng-repeat="activity in activities" data-value="{{activity}}" class="nya-bs-option">
+                            <a> {{activity | capitalize}} </a>
+                          </li>
+                        </ol>
                       </td>
                     </tr>
                   </tbody>
@@ -69,8 +72,8 @@
                 <thead>
                   <tr>
                     <th class="col-1">Week</th>
-                    <th class="col-2">Max Mileage</th>
-                    <th class="col-3">Min Pace</th>
+                    <th class="col-2">Maximum Mileage</th>
+                    <th class="col-3">Minimum Pace</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -83,7 +86,7 @@
                   </tr>
                   <tr ng-repeat-end ng-show="week.show">
                     <td colspan="4" style="padding:0px">
-                      <table class="table day-table">
+                      <table id="day-by-day" class="table day-table">
                         <thead>
                           <tr>
                             <th class="col-1">Day</th>
@@ -96,11 +99,11 @@
                           <tr ng-repeat="day in week.sched">
                             <td class="col-1">{{day.date | formatDate}}</td>
                             <td class="col-2">
-                              <select ng-model="day.activity" ng-change="changed(day)">
-                                <option ng-repeat="activity in activities" value="{{activity}}">
-                                  {{activity | capitalize}}
-                                </option>
-                              </select>
+                              <ol class="nya-bs-select" id="activity-dropdown" title="" ng-model="day.activity" ng-change="changed(day)">
+                                <li ng-repeat="activity in activities" data-value="{{activity}}" class="nya-bs-option">
+                                  <a> {{activity | capitalize}} </a>
+                                </li>
+                              </ol>
                             </td>
                             <td class="col-3" ng-show="day.activity=='rest'"></td>
                             <td class="col-3" ng-show="day.activity=='running'">

@@ -16,7 +16,7 @@
     <div id ="create1" 
       <ol class="breadcrumb" style="margin-bottom: 5px;">
         <li class="active">About You</li>
-        <li class="inactive">Suggested Progams</li>
+        <li class="inactive">Select a Progam!</li>
         <li class="inactive">Full Schedule</li>
       </ol>
     </div>
@@ -26,7 +26,6 @@
       </div>
       <div class="panel-body">
         <div id="dates">
-          <p>What day would you like to start training?</p><p style="float:right">What day is your race?</p>
           <input id="startdate" type="text" class="datepicker form-control input-date" placeholder="Start Date" ng-model="startDate" ng-change="restrictDate(startDate)"/>
           <input id="racedate" type="text" class="datepicker form-control input-date" placeholder="Race Date" ng-model="raceDate" style="float:right"/>
         </div>
@@ -37,6 +36,7 @@
               <a> {{option}} </a>
             </li>
           </ol>
+          <p></p>
         </div>
         <div id="currentpacequestion">
           <p>At what pace do you run{{mileage}}?</p>
@@ -57,6 +57,12 @@
           <button ng-repeat="day in days" class="btn btn-default selectable pointer" ng-click="selectDay(day)" name="{{day}}" ng-class="{highlight:isSelectedDay(day)}">{{day}}</button>
         </div>
         <div class="navigate">
+          <div id="pace-error" class="alert alert-danger">
+            Pace must be in format: minutes:seconds, e.g. 8:30
+          </div>
+          <div id="missing-pace-error" class="alert alert-danger">
+            You must enter your pace!
+          </div>
           <form>
             <input type="submit" class="btn btn-default" value="Continue" ng-click="update()">
           </form>

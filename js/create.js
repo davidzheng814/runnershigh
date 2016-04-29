@@ -3,7 +3,7 @@ var create = angular.module('create', ['nya.bootstrap.select']);
 create.factory('createVars', function(){
   var createVars = {
     selectedDays:[], currentPace:"", achievedPace:"", startDate:new Date(0, 0, 0), endDate:new Date(0, 0, 0),
-    mileage:"", mileages:[" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"," 20-26 miles"," >26 miles"]
+    mileage:"", mileages:[" <5 miles"," 5-10 miles"," 10-15 miles"," 15-20 miles"," 20-26 miles"," >26 miles"]
   };
   var programs = [{
     activities:['running', 'biking', 'running', 'running'],
@@ -121,8 +121,29 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
     $scope.update = function() {
       createVars.currentPace = $scope.currentPace;
       createVars.achievedPace = $scope.achievedPace;
-      createVars.startDate = new Date($scope.startDate);
-      createVars.endDate = new Date($scope.raceDate);
+      var re = /^\d\d?\:\d\d$/;
+      if (createVars.currentPace=="" || createVars.achievedPace=="") {
+        $("#missing-pace-error")[0].style.display = "block";
+        $("#pace-error")[0].style.display = "none";
+        return;
+      }
+      else if (createVars.currentPace.match(re)==null || createVars.achievedPace.match(re)==null) {
+        $("#pace-error")[0].style.display = "block";
+        $("#missing-pace-error")[0].style.display = "none";
+        return;
+      }
+      if ($scope.startDate=="") {
+        createVars.startDate=new Date(0, 0, 0);
+      }
+      else {
+        createVars.startDate = new Date($scope.startDate);
+      }
+      if ($scope.raceDate=="") {
+        createVars.raceDate=new Date(0, 0, 0);
+      }
+      else {
+        createVars.raceDate = new Date($scope.raceDate);
+      }
       createVars.selectedDays = $scope.selectedDays;
       createVars.mileage = $scope.mileage;
       window.location.href = "#create/programs";
@@ -159,7 +180,7 @@ create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars',
         name : "Waitz",
         programId: 0,
         difficulty: 4,
-        description: ["Running every day",
+        description: ["0 rest days",
                          "Alternate easy and hard runs",
                          "Builds long run to 20 miles",
                          "No cross-training"]
@@ -185,7 +206,7 @@ create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars',
         name: "Death Run",
         programId:3,
         difficulty: 5,
-        description: ["Running every day",
+        description: ["0 rest days",
                          "Run 15+ miles every day",
                          "Builds long run to 30 miles",
                          "No cross-training"]
