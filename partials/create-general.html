@@ -39,7 +39,7 @@
           <p></p>
         </div>
         <div id="currentpacequestion">
-          <p>At what pace can you run{{mileage}}?</p>
+          <p>At what pace can you run{{mileageToLowerBound(mileage)}}?</p>
           <div id="currentpaceanswer" class="question input-group">
             <input class="form-control" name="currentpaceanswer" ng-model="currentPace" aria-describedby="basic-addon2" placeholder="e.g. 8:30"/>
             <span class="units input-group-addon" id="basic-addon2">min/mile</span>

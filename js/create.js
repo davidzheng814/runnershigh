@@ -183,6 +183,28 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
       $('#racedate').datepicker('option', 'defaultDate', date);
       $('#racedate').datepicker('option', 'minDate', date);
     }
+
+    $scope.mileageToLowerBound = function(mileage) {
+      mileages:[" <5 miles"," 5-10 miles"," 10-15 miles"," 15-20 miles"," 20-26 miles"," >26 miles"]
+      if (mileage==" <5 miles") {
+        return " a mile";
+      }
+      else if (mileage==" >26 miles") {
+        return " a marathon";
+      }
+      else if (mileage==" 5-10 miles") {
+        return " 5 miles";
+      }
+      else if (mileage==" 10-15 miles") {
+        return " 10 miles";
+      }
+      else if (mileage==" 15-20 miles") {
+        return " 15 miles";
+      }
+      else if (mileage==" 20-26 miles") {
+        return " 20 miles";
+      }
+    }
   }]);
 
 create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars', 
