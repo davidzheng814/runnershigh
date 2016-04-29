@@ -15,10 +15,15 @@
     border-color:#d0d0d0;
 }
 
-#dates, .question {
+#dates{
     float:left;
-    width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    width:100%;
+}
+
+.question {
+    width: 49%;
+    margin-bottom: 25px;
 }
 
 .datepicker {
@@ -33,15 +38,21 @@
 
 #mileage-dropdown {
     margin-bottom:15px;
+    width:49%;
 }
 
 #trainingdays {
     clear: both;
 }
 
+#trainingdays .btn:focus {
+    background-color: white;
+    border-color:#ccc;
+}
+
 .ui-selected, .highlight {
     background-color: #0066dd !important;
-    color: white;
+    color: white !important;
 }
 
 .navigate .btn {
@@ -109,8 +120,8 @@
     width: 900px;
 }
 
-.create-page-45 {
-    width: 45% !important;
+.create-general {
+    width: 582px;
 }
 
 .create-programs {

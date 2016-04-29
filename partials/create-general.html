@@ -12,7 +12,7 @@
       </div>
     </div>
   </header>
-  <div class="container create-page-45" ng-app="create" ng-controller="CreateGeneralCtrl">
+  <div class="container create-general" ng-app="create" ng-controller="CreateGeneralCtrl">
     <div id ="create1" 
       <ol class="breadcrumb" style="margin-bottom: 5px;">
         <li class="active">About You</li>
@@ -54,7 +54,7 @@
         </div>
         <div id="trainingdays">
           <p>What days would you like to train?</p>
-          <button ng-repeat="day in days" class="btn btn-default selectable pointer" ng-click="selectDay(day)" name="{{day}}" ng-class="{highlight:isSelectedDay(day)}">{{day}}</button>
+          <button ng-repeat="day in days" class="btn btn-default selectable pointer" ng-click="selectDay(day)" name="{{day}}" ng-class="{highlight:selectedDays.indexOf(day) > -1}">{{day}}</button>
         </div>
         <div class="navigate">
           <div id="pace-error" class="alert alert-danger">

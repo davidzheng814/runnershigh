@@ -2,7 +2,7 @@ var create = angular.module('create', ['nya.bootstrap.select']);
 
 create.factory('createVars', function(){
   var createVars = {
-    selectedDays:[], currentPace:"", achievedPace:"", startDate:new Date(0, 0, 0), endDate:new Date(0, 0, 0),
+    selectedDays:[], currentPace:"", achievedPace:"", startDate:new Date(0, 0, 0), raceDate:new Date(0, 0, 0),
     mileage:"", mileages:[" <5 miles"," 5-10 miles"," 10-15 miles"," 15-20 miles"," 20-26 miles"," >26 miles"]
   };
   var programs = [{
@@ -73,7 +73,7 @@ create.factory('createVars', function(){
       return d;
     }
     var lastSun = lastSunday(date);
-    while (date.getTime() <= createVars.endDate.getTime()) {
+    while (date.getTime() <= createVars.raceDate.getTime()) {
       var day = toDay[date.getDay()];
       var activity = createVars.myActivities[day];
       if(activity == 'running' || activity == 'biking') {
@@ -112,7 +112,7 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
     };
 
     $scope.startDate = $scope.dateToString(createVars.startDate);
-    $scope.raceDate = $scope.dateToString(createVars.endDate);
+    $scope.raceDate = $scope.dateToString(createVars.raceDate);
     $scope.mileage = createVars.mileage;
     create = $scope;
     $scope.$on('$viewContentLoaded', function(){
@@ -134,13 +134,13 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
         return;
       }
       if ($scope.startDate=="") {
-        createVars.startDate=new Date(0, 0, 0);
+        createVars.startDate = new Date(0, 0, 0);
       }
       else {
         createVars.startDate = new Date($scope.startDate);
       }
       if ($scope.raceDate=="") {
-        createVars.raceDate=new Date(0, 0, 0);
+        createVars.raceDate = new Date(0, 0, 0);
       }
       else {
         createVars.raceDate = new Date($scope.raceDate);
@@ -167,10 +167,6 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
       }
       $('#racedate').datepicker('option', 'defaultDate', date);
       $('#racedate').datepicker('option', 'minDate', date);
-    }
-
-    $scope.isSelectedDay = function(day) {
-      return ($scope.selectedDays.indexOf(day) > -1) 
     }
   }]);
 
