@@ -49,9 +49,15 @@ create.factory('createVars', function(){
         {distance:23}]
     }
   }];
-  createVars.programId = 0;
-  createVars.trainingDays = ['Monday', 'Wednesday', 'Friday'];
+  createVars.programId = -1;
+  createVars.isNewProgram = false;
   var createSchedule = function(schedule){
+    createVars.isNewProgram = false;
+    var toLongDay = {Sun:'Sunday', Mon:'Monday', Tues:'Tuesday', Wed:'Wednesday', Thurs:'Thursday', Fri:'Friday', Sat:'Saturday'};
+    createVars.trainingDays = [];
+    for(day of createVars.selectedDays) {
+      createVars.trainingDays.push(toLongDay[day]);
+    }
     schedule.length = 0;
     var program = programs[createVars.programId];
     createVars.myActivities = {Sunday:'rest', Monday:'rest', Tuesday:'rest', Wednesday:'rest', Thursday:'rest', Friday:'rest', Saturday:'rest'};
@@ -113,14 +119,12 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
     });
 
     $scope.update = function() {
-      // console.log($scope);
       createVars.currentPace = $scope.currentPace;
       createVars.achievedPace = $scope.achievedPace;
       createVars.startDate = new Date($scope.startDate);
       createVars.endDate = new Date($scope.raceDate);
       createVars.selectedDays = $scope.selectedDays;
       createVars.mileage = $scope.mileage;
-      // console.log(createVars);
       window.location.href = "#create/programs";
     }
 
@@ -151,33 +155,37 @@ create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedV
 create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars', 
   function($scope, $routeParams, createVars) {
     $scope.programs = {
-      "waitz" : {
-        "name" : "Waitz",
-        "difficulty" : 4,
-        "description" : ["Running every day",
+      waitz: {
+        name : "Waitz",
+        programId: 0,
+        difficulty: 4,
+        description: ["Running every day",
                          "Alternate easy and hard runs",
                          "Builds long run to 20 miles",
                          "No cross-training"]
       },
-      "first" : {
-        "name" : "FIRST",
-        "difficulty" : 3,
-        "description" : ["1 rest day",
+      first: {
+        name: "FIRST",
+        programId:1,
+        difficulty: 3,
+        description: ["1 rest day",
                          "Alternate running and cross-training",
                          "Builds long run to 20 miles"]
       },
-      "active" : {
-        "name" : "ACTIVE",
-        "difficulty" : 2,
-        "description" : ["2 rest days",
+      active: {
+        name: "ACTIVE",
+        programId:2,
+        difficulty: 2,
+        description: ["2 rest days",
                          "Builds running up throughout the week",
                          "Builds long run to 23 miles",
                          "No cross-training"]
       },
-      "deathrun" : {
-        "name" : "Death Run",
-        "difficulty" : 5,
-        "description" : ["Running every day",
+      deathrun: {
+        name: "Death Run",
+        programId:3,
+        difficulty: 5,
+        description: ["Running every day",
                          "Run 15+ miles every day",
                          "Builds long run to 30 miles",
                          "No cross-training"]
@@ -189,36 +197,23 @@ create.controller('CreateProgramsCtrl', ['$scope', '$routeParams', 'createVars',
         "description" : []
       };
     $scope.range = new Array(5);
+    $scope.createVars = createVars;
 
     $scope.back = function() {
       window.location.href = "#create/general";
     }
 
     $scope.update = function() {
-      if ($scope.program===undefined) {
+      if (createVars.programId < 0) {
         $("#no-continue")[0].style.display = "block";
+        return;
       }
-      else {
-        createVars.program = $scope.program;
-        window.location.href = "#create/details";
-      }
+      window.location.href = "#create/details";
     }
 
     $scope.selectProgram = function(program) {
-      $scope.program = program;
-      for (var key in $scope.programs) {
-        $(document.getElementsByName($scope.programs[key].name)).removeClass("ui-selected");
-        $(document.getElementsByName($scope.own.name)).removeClass("ui-selected");
-    };
-      $(document.getElementsByName(program.name)).addClass("ui-selected");
-    }
-
-    $scope.createProgram = function() {
-      $scope.program = $scope.own;
-      for (var key in $scope.programs) {
-        $(document.getElementsByName($scope.programs[key].name)).removeClass("ui-selected");
-    };
-      $(document.getElementsByName($scope.program.name)).addClass("ui-selected");
+      createVars.programId = program.programId;
+      createVars.isNewProgram = true;
     }
   }]);
 
@@ -226,7 +221,7 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
   function($scope, $routeParams, createVars, schedVars) {
     create = $scope;
     $scope.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    createVars.createSchedule(schedVars.schedule);
+    if(createVars.isNewProgram) createVars.createSchedule(schedVars.schedule);
     // createVars.myActivities = {Sunday:'rest', Monday:'rest', Tuesday:'rest', Wednesday:'running', 
     //                            Thursday:'running',Friday:'running', Saturday:'running'};
     $scope.myActivities = createVars.myActivities;
