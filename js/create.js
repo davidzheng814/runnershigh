@@ -3,7 +3,7 @@ var create = angular.module('create', ['nya.bootstrap.select']);
 create.factory('createVars', function(){
   var createVars = {
     selectedDays:[], currentPace:"", achievedPace:"", startDate:new Date(0, 0, 0), endDate:new Date(0, 0, 0),
-    mileage:"", mileages:[" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"]
+    mileage:"", mileages:[" <5 miles"," 5-10 miles"," 10-15 miles"," >15 miles"," 20-26 miles"," >26 miles"]
   };
   var programs = [{
     activities:['running', 'biking', 'running', 'running'],
@@ -94,14 +94,6 @@ create.factory('createVars', function(){
   }
   createVars.programs = programs, createVars.createSchedule = createSchedule;
   return createVars;
-  var selectedDays = [];
-  var currentPace = "";
-  var achievedPace = "";
-  var startDate = "";
-  var raceDate = "";
-  var mileage = "";
-  var mileages = [" <5 miles"," 5-10 miles"," 10-15 miles"," 15-20 miles"," 20-26 miles"," >26 miles"];
-  return {selectedDays:selectedDays,currentPace:currentPace,achievedPace:achievedPace,startDate:startDate,raceDate:raceDate,mileage:mileage,mileages:mileages};
 });
 
 create.controller('CreateGeneralCtrl', ['$scope', '$http', 'createVars', 'schedVars', 

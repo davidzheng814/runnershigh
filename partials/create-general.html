@@ -15,44 +15,21 @@
   <div class="container create-page-45" ng-app="create" ng-controller="CreateGeneralCtrl">
     <div id ="create1" 
       <ol class="breadcrumb" style="margin-bottom: 5px;">
-        <li class="active">Your Running</li>
+        <li class="active">About You</li>
         <li class="inactive">Suggested Progams</li>
         <li class="inactive">Full Schedule</li>
       </ol>
     </div>
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Your Running</h3>
-  </div>
-</header>
-<div class="container create-page-45" ng-app="create" ng-controller="CreateGeneralCtrl">
-  <div id ="create1" 
-    <ol class="breadcrumb" style="margin-bottom: 5px;">
-      <li class="active">Your Running</li>
-      <li class="inactive">Suggested Progams</li>
-      <li class="inactive">Full Schedule</li>
-    </ol>
-  </div>
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title">About You</h3>
-    </div>
-    <div class="panel-body">
-      <div id="dates">
-        <p>What day would you like to start training?</p>
-        <input id="startdate" type="text" class="datepicker form-control input-date" placeholder="Start Date" ng-model="startDate" ng-change="restrictDate(startDate)"/>
-        <p>What day is your race?</p>
-        <input id="racedate" type="text" class="datepicker form-control input-date" placeholder="Race Date" ng-model="raceDate" style="float:right"/>
-      </div>
-      <div id="furthestmileage">
-        <p>What is the furthest mileage you can run?</p>
-        <ol class="nya-bs-select" id="mileage-dropdown" title="Select range..." ng-model="mileage">
-          <li ng-repeat="option in mileages" data-value="{{option}}" class="nya-bs-option">
-            <a> {{option}} </a>
-          </li>
-        </ol>
+        <h3 class="panel-title">About You</h3>
       </div>
       <div class="panel-body">
+        <div id="dates">
+          <p>What day would you like to start training?</p><p style="float:right">What day is your race?</p>
+          <input id="startdate" type="text" class="datepicker form-control input-date" placeholder="Start Date" ng-model="startDate" ng-change="restrictDate(startDate)"/>
+          <input id="racedate" type="text" class="datepicker form-control input-date" placeholder="Race Date" ng-model="raceDate" style="float:right"/>
+        </div>
         <div id="furthestmileage">
           <p>What is the furthest distance you can run?</p>
           <ol class="nya-bs-select" id="mileage-dropdown" title="Select range..." ng-model="mileage">
@@ -75,10 +52,6 @@
             <span class="units input-group-addon" id="basic-addon2">min/mile</span>
           </div>
         </div>
-        <div id="dates">
-          <input id="startdate" type="text" class="datepicker form-control input-date" placeholder="Start Date" ng-model="startDate" ng-change="restrictDate(startDate)"/>
-          <input id="racedate" type="text" class="datepicker form-control input-date" placeholder="Race Date" ng-model="raceDate" style="float:right"/>
-        </div>
         <div id="trainingdays">
           <p>What days would you like to train?</p>
           <button ng-repeat="day in days" class="btn btn-default selectable pointer" ng-click="selectDay(day)" name="{{day}}" ng-class="{highlight:isSelectedDay(day)}">{{day}}</button>
@@ -88,15 +61,6 @@
             <input type="submit" class="btn btn-default" value="Continue" ng-click="update()">
           </form>
         </div>
-      </div>
-      <div id="trainingdays">
-        <p>What days would you like to train?</p>
-        <button ng-repeat="day in days" class="btn btn-default selectable pointer" ng-click="selectDay(day)" name="{{day}}" ng-class="{highlight:isSelectedDay(day)}">{{day}}</button>
-      </div>
-      <div class="navigate">
-        <form>
-          <input type="submit" class="btn btn-default" value="Continue" ng-click="update()">
-        </form>
       </div>
     </div>
   </div>
