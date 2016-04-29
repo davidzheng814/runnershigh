@@ -12,7 +12,7 @@
         </div>
       </div>
     </header>
-    <div class="container create-page-50" ng-app="create" ng-controller="CreateProgramsCtrl">
+    <div class="container create-programs" ng-app="create" ng-controller="CreateProgramsCtrl">
       <div id ="create1">
         <ol class="breadcrumb" style="margin-bottom: 5px;">
           <li><a href="#create/general/">Your Running</a></li>
@@ -21,47 +21,43 @@
         </ol>
       </div>
       <div class="panel panel-info">
-      	<div class="panel-heading">
+        <div class="panel-heading">
           <h3 class="panel-title">Suggested Programs</h3>
         </div>
-    		
-    		<div class="panel-body">
-    			<table class="table" id="programs">
-    		    <thead>
-    				<tr>
-    					<th>Name</th>
-    					<th>Difficulty</th>
-    					<th>Description</th>
-    				</tr>
-    			</thead>
-    			<tbody>
-    				<tr ng-repeat="program in programs" class="pointer" ng-click="selectProgram(program)" name={{program.name}}>
-    					<td>{{program.name}}</td>
-    					<td><span class="glyphicon glyphicon-star" ng-repeat="i in range.slice(0,program.difficulty) track by $index"/><span class="glyphicon glyphicon-star-empty" ng-repeat="i in range.slice(0,5-program.difficulty) track by $index"/></td>
-    					<td>
-    						<ul>
-    							<li ng-repeat="bullet in program.description">{{bullet}}</li>
-    						</ul>
-    					</td>
-    				</tr>
-    				<tr class="pointer" ng-click="createProgram()" name="Own">
-    					<td colspan="3">Create your own</td>
-    				</tr>
-    			</tbody>
-    		</table>
-    			<div class="navigate">
-    		    <form>
-    		      <input type="submit" class="btn btn-default" value="Back" ng-click="back()">
-    		    </form>
-    	      <form>
-    	        <input type="submit" class="btn btn-default" value="Continue" ng-click="update()">
-            </form>
-    		    <br class="clearFloat">
+        
+        <div class="panel-body">
+          <table class="table" id="programs">
+            <thead>
+            <tr>
+              <th class="col-1">Name</th>
+              <th class="col-2">Difficulty</th>
+              <th class="col-3">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="program in programs" class="pointer" ng-click="selectProgram(program)" name="{{program.name}}">
+              <td class="col-1">{{program.name}}</td>
+              <td class="col-2"><span class="glyphicon glyphicon-star" ng-repeat="i in range.slice(0,program.difficulty) track by $index"/><span class="glyphicon glyphicon-star-empty" ng-repeat="i in range.slice(0,5-program.difficulty) track by $index"/></td>
+              <td class="col-3">
+                <ul>
+                  <li ng-repeat="bullet in program.description">{{bullet}}</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+          <div class="navigate">
             <div id="no-continue" class="alert alert-danger">
               You must select a program before continuing!
             </div>
+            <form>
+              <input type="submit" class="btn btn-default" value="Back" ng-click="back()">
+            </form>
+            <form>
+              <input type="submit" style="margin-left:10px" class="btn btn-default" value="Continue" ng-click="update()">
+            </form>
           </div>
-    		</div>
-    	</div>
+        </div>
+      </div>
     </div>
 </div>

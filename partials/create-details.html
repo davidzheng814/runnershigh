@@ -64,55 +64,58 @@
               <div class="panel-heading">
                 <h3 class="panel-title">Schedule</h3>
               </div>
+              <h4 style="margin-left:16px;font-weight:normal">Click a week to view day-by-day breakdown:</h4>
               <table class="table" id="schedule">
                 <thead>
                   <tr>
-                    <th>Week</th>
-                    <th>Max Mileage</th>
-                    <th>Min Pace</th>
+                    <th class="col-1">Week</th>
+                    <th class="col-2">Max Mileage</th>
+                    <th class="col-3">Min Pace</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat-start="week in scheduleByWeek">
-                    <td>{{week.date | weekRange}}</td>
-                    <td>{{week.sched | maxMileage}}</td>
-                    <td>{{week.sched | formatMinPace}} min/mi</td>
-                    <td><button class="glyphicon glyphicon-info-sign scheduleinfo" aria-hidden="true" ng-click="showWeek(week)"></button></td>
+                  <tr ng-repeat-start="week in scheduleByWeek" class="week" ng-click="showWeek(week)">
+                    <td class="col-1">{{week.date | weekRange}}</td>
+                    <td class="col-2">{{week.sched | maxMileage}}</td>
+                    <td class="col-3">{{week.sched | formatMinPace}} min/mi</td>
+                    <td></td>
                   </tr>
                   <tr ng-repeat-end ng-show="week.show">
-                    <td colspan="4">
-                      <table class="table">
+                    <td colspan="4" style="padding:0px">
+                      <table class="table day-table">
                         <thead>
                           <tr>
-                            <th>Day</th>
-                            <th>Activity</th>
-                            <th>Length</th>
+                            <th class="col-1">Day</th>
+                            <th class="col-2">Activity</th>
+                            <th class="col-3">Length</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr ng-repeat="day in week.sched">
-                            <td>{{day.date | formatDate}}</td>
-                            <td>
+                            <td class="col-1">{{day.date | formatDate}}</td>
+                            <td class="col-2">
                               <select ng-model="day.activity" ng-change="changed(day)">
                                 <option ng-repeat="activity in activities" value="{{activity}}">
                                   {{activity | capitalize}}
                                 </option>
                               </select>
                             </td>
-                            <td ng-show="day.activity=='rest'"></td>
-                            <td ng-show="day.activity=='running'">
+                            <td class="col-3" ng-show="day.activity=='rest'"></td>
+                            <td class="col-3" ng-show="day.activity=='running'">
                               <input class="dailyrun" value="{{day.distance}}" id="running-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi at <input class="dailyrun" ng-blur="changed(day)" id="running-pace-{{day.date.getTime()}}" value="{{day.pace | formatPace}}">min/mi
                             </td>
-                            <td ng-show="day.activity=='rowing'">
+                            <td class="col-3" ng-show="day.activity=='rowing'">
                               <input class="dailyrun" value="{{day.distance}}" id="rowing-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi
                             </td>
-                            <td ng-show="day.activity=='swimming'">
+                            <td class="col-3" ng-show="day.activity=='swimming'">
                               <input class="dailyrun" value="{{day.distance}}" id="swimming-dist-{{day.date.getTime()}}"  ng-blur="changed(day)"> mi
                             </td>
-                            <td ng-show="day.activity=='biking'">
+                            <td class="col-3" ng-show="day.activity=='biking'">
                               <input class="dailyrun" value="{{day.distance}}" id="biking-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi at <input class="dailyrun" id="biking-pace-{{day.date.getTime()}}" value="{{day.pace | formatPace}}"  ng-blur="changed(day)">min/mi
                             </td>
+                            <td></td>
                           </tr>
                         </tbody>
                       </table>
@@ -129,7 +132,7 @@
                   <input type="submit" class="btn btn-default" value="Back">
                 </form>
                 <form action="#create/finished" style="display:inline-block">
-                  <input type="submit" class="btn btn-default" value="Done!">
+                  <input style="margin-left:10px" type="submit" class="btn btn-default" value="Done!">
                 </form>
                 <br class="clearFloat">
               </div>

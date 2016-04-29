@@ -109,16 +109,54 @@
     width: 45% !important;
 }
 
-.create-page-50 {
-    width: 50% !important;
+.create-programs {
+    width:700px;
 }
 
-#programs > thead > tr > th, #programs > tbody > tr > th, #programs > tfoot > tr > th, 
-#programs > thead > tr > td, #programs > tbody > tr > td, #programs > tfoot > tr > td {
-    padding-right: 40px !important;
-    padding-left: 40px !important;
+#programs tbody{
+    overflow:scroll;
+    display:block;
+    height:341px;
 }
 
+#programs thead tr,#programs tbody tr {
+    display:table;
+    width:100%;
+}
+
+#programs thead {
+    width:100%;
+}
+
+#programs .col-1 {
+    width:20%;
+}
+
+#programs .col-2 {
+    width:20%;
+}
+
+#programs .col-3 {
+    width:60%;
+}
+
+#schedule .col-1{
+    padding-left:30px;
+    width:200px;
+}
+
+#schedule .col-2{
+    width:200px;
+}
+
+#schedule .col-3{
+    width:280px;
+}
+
+.week {
+    background-color:#f5f5f5;
+    cursor:pointer;
+}
 .input-date {
     width: 255px !important;
     /*margin-right: 50px !important;*/
@@ -145,5 +183,5 @@
 }
 
 .inactive {
-    color: grey;
+    color: gray;
 }
