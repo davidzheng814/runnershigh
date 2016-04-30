@@ -66,3 +66,33 @@ app.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
 app.config(['highchartsNGProvider', function (highchartsNGProvider) {
     highchartsNGProvider.lazyLoad();// will load hightcharts (and standalone framework if jquery is not present) from code.hightcharts.com
 }]);
+
+app.run(function($rootScope) {
+  bind = Function.bind;
+  unbind = bind.bind(bind);
+
+  instantiate = function(constructor, args) {
+      return new (unbind(constructor, null).apply(null, args));
+  }
+
+  changeSystemDate = function(newDate) {
+    var UTC = Date.UTC;
+    Date = function (Date) {
+      MyDate.prototype = Date.prototype;
+
+      return MyDate;
+
+      function MyDate() {
+          var date = instantiate(Date, arguments);
+          var args = arguments.length;
+
+          if (args == 0) {
+            date.setDate(newDate.getDate());
+            date.setMonth(newDate.getMonth());
+          }
+          return date;
+      }
+    }(Date);
+    Date.UTC = UTC;
+  }
+});
