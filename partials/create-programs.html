@@ -37,7 +37,8 @@
           <tbody>
             <tr ng-repeat="program in programs" class="pointer" ng-click="selectProgram(program)" ng-class="createVars.programId==program.programId ? 'ui-selected' : ''">
               <td class="col-1">{{program.name}}</td>
-              <td class="col-2"><span class="glyphicon glyphicon-star" ng-repeat="i in range.slice(0,program.difficulty) track by $index"/><span class="glyphicon glyphicon-star-empty" ng-repeat="i in range.slice(0,5-program.difficulty) track by $index"/></td>
+              <td class="col-2"><span class="glyphicon glyphicon-flash" ng-repeat="i in range.slice(0,program.difficulty) track by $index"/>
+              <!-- <span class="glyphicon glyphicon-star-empty" ng-repeat="i in range.slice(0,5-program.difficulty) track by $index"/></td> -->
               <td class="col-3">
                 <ul>
                   <li ng-repeat="bullet in program.description">{{bullet}}</li>
