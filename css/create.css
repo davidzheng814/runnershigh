@@ -222,9 +222,9 @@
 }
 
 #day-by-day ol button {
-    height: 20px !important;
+    height: 25px !important;
     padding: 0px !important;
-    font-size: 10px !important;
+    font-size: 13px !important;
 }
 
 #day-by-day ol button span {
