@@ -16,7 +16,7 @@
 
 <div class="container" id="day-container">
 
-  <h1 class="day-heading"> {{dateString(currDayInfo.date)}} </h1>
+  <h1 class="day-heading" uib-popover-html="helpMessage[0]" popover-is-open="helpInd == 0" popover-placement="bottom" popover-trigger="none"> {{dateString(currDayInfo.date)}} </h1>
 
   <div class="row">
     <div class="col-md-6">
@@ -26,7 +26,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div id="minimap-view">
+      <div id="minimap-view" uib-popover-html="helpMessage[2]" popover-is-open="helpInd == 2" popover-trigger="none">
         <ui-gmap-google-map center='map.center' zoom='map.zoom' pan="true">
           <ui-gmap-polygon path="selectedTrail.path" geodesic="mapconfig.geodesic" editable="mapconfig.editable" draggable="mapconfig.draggable" fit="mapconfig.fit" fill="mapconfig.fill", static="mapconfig.static", stroke="mapconfig.stroke">
           </ui-gmap-polygon>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="text-center" style="margin-top: 15px">
-        <a class="btn btn-default" href="#trail"> Choose Trail</a>
+        <a class="btn btn-default" href="#trail" uib-popover-html="helpMessage[3]" popover-is-open="helpInd == 3" popover-trigger="none"> Choose Trail</a>
       </div>
     </div>
 
@@ -45,12 +45,12 @@
         <div class="panel-heading selected-event-heading">Task</div>
 
         <div class="panel-body selected-event">
-          <div style="margin-bottom: 30px; text-align: center">
+          <div style="margin-bottom: 30px; text-align: center" uib-popover-html="helpMessage[1]" popover-is-open="helpInd == 1" popover-trigger="none">
             <span class="selected-event-activity">{{currDayInfo.activity}}</span>: Go for {{currDayInfo.distance}} miles at {{currDayInfo.pace}} min per mile.
           </div>
 
           <div class="row">
-            <div class="col-md-6 text-right input-text">
+            <div class="col-md-6 text-right input-text" uib-popover-html="helpMessage[4]" popover-is-open="helpInd == 4" popover-trigger="none" popover-placement="left">
               Distance Ran:
             </div>
             <div class="col-md-4">

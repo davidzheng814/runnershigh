@@ -8,7 +8,8 @@ var app = angular.module('app', [
   'highcharts-ng',
   'main',
   'trail',
-  'progress'
+  'progress',
+  'ui.bootstrap'
 ]);
 
 
@@ -50,6 +51,9 @@ app.config(['$routeProvider',
       when('/progress', {
         templateUrl: 'partials/progress.html',
         controller: 'ProgressCtrl'
+      }).
+      when('/popovers/popover0.html', {
+        templateUrl: 'partials/popovers/popover0.html'
       }).
       otherwise({
         redirectTo: '/'

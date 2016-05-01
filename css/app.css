@@ -2,3 +2,5 @@
     color:#0062D8 !important;
     font-size:24px !important;
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

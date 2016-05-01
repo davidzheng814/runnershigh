@@ -39,11 +39,35 @@ main.config(function(calendarConfig){
 
 
 
-main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVars', 'uiGmapIsReady',
-  function($scope, $http, userVars, schedVars, trailVars, uiGmapIsReady) {
-
+main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVars', 'uiGmapIsReady', '$sce', 
+  function($scope, $http, userVars, schedVars, trailVars, uiGmapIsReady, $sce) {
+    day = $scope;
     $scope.currDayInfo = schedVars.currDayInfo;
     $scope.trailVars = trailVars;
+    $scope.helpInd = -1;
+    if(userVars.firstTime && $scope.currDayInfo.activity != 'rest') {
+        userVars.firstTime = false;
+        $scope.helpInd = 0;
+    }
+
+    $scope.helpMessage = ['Welcome to your dashboard! Let\'s take a quick tour!<br><br>', 
+    'This is your activity for the day.<br><br><br>', 
+    'Here you can view the trail we\'ve selected for you to run for the day. <br><br><br>', 
+    'Of course, you can also discover and choose other trails.<br><br>', 
+    'When you\'re done with your training session, you can log your mileage and time here.<br><br>', 
+    'Finally, you can view training details for other days by using the calendar.'
+    ];
+    for(i = 0; i < $scope.helpMessage.length; ++i) {
+        var text = i == $scope.helpMessage.length - 1 ? 'Done' : 'Next';
+        var button = '<button class="btn btn-default help-button" onclick="nextHelp()">'+text+'</button>';
+        $scope.helpMessage[i] = $sce.trustAsHtml($scope.helpMessage[i] + button);
+    }
+
+    nextHelp = function(){
+        $scope.$apply(function(){
+            $scope.helpInd += 1;
+        });
+    }
 
     $scope.dateString = function(date) {
         var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

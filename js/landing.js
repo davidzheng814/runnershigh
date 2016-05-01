@@ -1,7 +1,7 @@
 var landing = angular.module('landing', []);
 
 landing.factory('userVars', function(){
-    return {};
+    return {firstTime:true};
 });
 
 landing.factory('schedVars', function(){
