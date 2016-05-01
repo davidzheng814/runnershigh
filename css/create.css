@@ -26,6 +26,10 @@
     margin-bottom: 25px;
 }
 
+.week-error {
+    background-color:#f2dede !important;
+}
+
 .datepicker {
     width: 45% !important;
     margin-right: 5px;

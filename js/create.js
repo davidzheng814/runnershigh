@@ -33,20 +33,7 @@ create.factory('createVars', function(){
         {distance:13,pace:7.5},
         {distance:13,pace:7.5},
         {distance:13,pace:7.5},
-        {distance:13,pace:7.5}],
-      rowing:[
-        {distance:5},
-        {distance:6},
-        {distance:7},
-        {distance:8},
-        {distance:10},
-        {distance:10},
-        {distance:13},
-        {distance:15},
-        {distance:16},
-        {distance:19},
-        {distance:20},
-        {distance:23}]
+        {distance:13,pace:7.5}]
     }
   }];
   createVars.programId = -1;
@@ -283,6 +270,7 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
     $scope.activities = schedVars.activities;
     $scope.schedule = schedVars.schedule;
     $scope.scheduleByWeek = [];
+    $scope.error = false;
 
     $scope.showWeek = function(week){
       week.show = !week.show;
@@ -307,7 +295,7 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
       lastSunday_ = lastSunday($scope.schedule[i].date);
       if(currLastSunday == null || !currLastSunday.equals(lastSunday_)) {
         currLastSunday = lastSunday_;
-        $scope.scheduleByWeek.push({date:currLastSunday,sched:[],show:false});
+        $scope.scheduleByWeek.push({date:currLastSunday,sched:[],show:false,hasError:false});
         ++ind;
       }
       $scope.scheduleByWeek[ind].sched.push($scope.schedule[i]);
@@ -351,71 +339,84 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
         }
       }
     }, true);
+  
+    $scope.changedActivity = function(day) {
+      delete day['pace'], delete day['distance'];
+      $('#'+day.activity+'-dist-'+day.date.getTime()).val("");
+      $('#'+day.activity+'-pace-'+day.date.getTime()).val("");
+      if(day.activity == 'rowing' || day.activity=='swimming') {
+        day.distance = 0;
+      } else if(day.activity == 'biking' || day.activity == 'running'){
+        day.distance = 0;
+        day.pace = 0;
+      }
+      $scope.changed(day);
+    }
 
     $scope.changed = function(day) {
-      if(day.activity == 'rest') {
-        delete day['pace'], delete day["distance"];
-      } else if(day.activity == 'rowing' || day.activity=='swimming') {
-        delete day['pace'];
-        if(!('distance' in day)) {
-          day.distance = 0;
-        }
-      } else {
-        if(!('distance' in day)) {
-          day.distance = 0;
-        }
-        if(!('pace' in day)) {
-          day.pace = 0;
-        }
-      }
       if (day.activity == 'rowing') {
         var val = parseInt($('#rowing-dist-'+day.date.getTime()).val());
-        if(isNaN(val)) {
-          $('#rowing-dist-'+day.date.getTime()).val(day.distance);
+        if(isNaN(val) || val <= 0) {
+          $('#rowing-dist-'+day.date.getTime()).val(day.distance == 0 ? "" : day.distance);
         } else {
           day.distance = val;
         }
       } else if (day.activity == 'swimming') {
         var val = parseInt($('#swimming-dist-'+day.date.getTime()).val());
-        if(isNaN(val)) {
-          $('#swimming-dist-'+day.date.getTime()).val(day.distance);
+        if(isNaN(val) || val <= 0) {
+          $('#swimming-dist-'+day.date.getTime()).val(day.distance == 0 ? "" : day.distance);
         } else {
           day.distance = val;
         }
       } else if (day.activity == 'biking') {
         var val = parseInt($('#biking-dist-'+day.date.getTime()).val());
-        if(isNaN(val)) {
-          $('#biking-dist-'+day.date.getTime()).val(day.distance);
+        if(isNaN(val) || val <= 0) {
+          $('#biking-dist-'+day.date.getTime()).val(day.distance == 0 ? "" : day.distance);
         } else {
           day.distance = val;
         }
 
         val = $('#biking-pace-'+day.date.getTime()).val();
         val = parseInt(val.split(':')[0]) + parseInt(val.split(':')[1])/60;
-        if(isNaN(val)) {
+        if(isNaN(val) || val <= 0) {
           var seconds = ("0" + Math.round((day.pace - Math.floor(day.pace))*60)).slice(-2);
-          $('#biking-pace-'+day.date.getTime()).val(Math.floor(day.pace)+':'+seconds);
+          $('#biking-pace-'+day.date.getTime()).val(day.pace == 0 ? "" : Math.floor(day.pace)+':'+seconds);
         } else {
           day.pace = val;
         }
       } else if (day.activity == 'running') {
         var val = parseInt($('#running-dist-'+day.date.getTime()).val());
-        if(isNaN(val)) {
-          $('#running-dist-'+day.date.getTime()).val(day.distance);
+        if(isNaN(val) || val <= 0) {
+          $('#running-dist-'+day.date.getTime()).val(day.distance == 0 ? "" : day.distance);
         } else {
           day.distance = val;
         }
 
         val = $('#running-pace-'+day.date.getTime()).val();
         val = parseInt(val.split(':')[0]) + parseInt(val.split(':')[1])/60;
-        if(isNaN(val)) {
+        if(isNaN(val) || val <= 0) {
           var seconds = ("0" + Math.round((day.pace - Math.floor(day.pace))*60)).slice(-2);
-          $('#running-pace-'+day.date.getTime()).val(Math.floor(day.pace)+':'+seconds);
+          $('#running-pace-'+day.date.getTime()).val(day.pace == 0 ? "" : Math.floor(day.pace)+':'+seconds);
         } else {
           day.pace = val;
         }
       }
-    };
+    }
+
+    $scope.submit = function(){
+      $scope.error = false;
+      for(week of $scope.scheduleByWeek) {
+        week.hasError = false;
+        for(day of week.sched) {
+          if(('distance' in day && day.distance == 0) || ('pace' in day && day.pace == 0)) {
+            $scope.error = true;
+            week.hasError = true;
+          }
+        }
+      }
+      if($scope.error) return;
+      window.location.href = '#create/finished';
+    }
 
     $scope.optionsConfig = {
       options: {
@@ -548,6 +549,9 @@ create.filter('maxMileage', function(){
       if(sched[i].activity != 'running') continue;
       maxMileage = Math.max(sched[i].distance,maxMileage);
     }
+    if(maxMileage == 0) {
+      return "N/A";
+    }
     return maxMileage+' mi';
   }
 });
@@ -557,19 +561,35 @@ create.filter('formatMinPace', function(){
     var minPace = 100;
     for(i = 0; i < sched.length; ++i) {
       if(sched[i].activity != 'running') continue;
+      if(sched[i].pace == 0) continue;
       minPace = Math.min(sched[i].pace,minPace);
     }
+    if(minPace == 100) {
+      return "N/A";
+    }
     var seconds = ("0" + Math.round((minPace - Math.floor(minPace))*60)).slice(-2);
-    return Math.floor(minPace)+':'+seconds;
+    return Math.floor(minPace)+':'+seconds+' min/mi';
   }
 });
 
 create.filter('formatPace', function(){
   return function(pace){
+    if(pace == 0) {
+      return "";
+    }
     var seconds = ("0" + Math.round((pace - Math.floor(pace))*60)).slice(-2);
     return Math.floor(pace)+':'+seconds;
   }
 });
+
+create.filter('formatDistance', function(){
+  return function(dist){
+    if(dist == 0){
+      return "";
+    }
+    return dist+"";
+  }
+})
 
 
 create.filter('formatDate', function(){

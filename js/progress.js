@@ -24,6 +24,9 @@ progress.controller('ProgressCtrl', ['$scope', '$http', 'userVars', 'schedVars',
             chart: {
                 zoomType: 'x',
                 animation:false,
+                style: {
+                  fontFamily: 'Helvetica Neue'
+                }
             },
             title: {
                 text: 'My Progress',

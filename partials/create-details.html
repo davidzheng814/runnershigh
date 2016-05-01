@@ -75,10 +75,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat-start="week in scheduleByWeek" class="week" ng-click="showWeek(week)">
+                  <tr ng-repeat-start="week in scheduleByWeek" class="week" ng-class="{'week-error':week.hasError}" ng-click="showWeek(week)">
                     <td class="col-1">{{week.date | weekRange}}</td>
                     <td class="col-2">{{week.sched | maxMileage}}</td>
-                    <td class="col-3">{{week.sched | formatMinPace}} min/mi</td>
+                    <td class="col-3">{{week.sched | formatMinPace}}</td>
                     <td></td>
                   </tr>
                   <tr ng-repeat-end ng-show="week.show">
@@ -96,7 +96,7 @@
                           <tr ng-repeat="day in week.sched">
                             <td class="col-1">{{day.date | formatDate}}</td>
                             <td class="col-2">
-                              <ol class="nya-bs-select" id="activity-dropdown" title="" ng-model="day.activity" ng-change="changed(day)">
+                              <ol class="nya-bs-select" id="activity-dropdown" title="" ng-model="day.activity" ng-change="changedActivity(day)">
                                 <li ng-repeat="activity in activities" data-value="{{activity}}" class="nya-bs-option">
                                   <a> {{activity | capitalize}} </a>
                                 </li>
@@ -104,16 +104,16 @@
                             </td>
                             <td class="col-3" ng-show="day.activity=='rest'"></td>
                             <td class="col-3" ng-show="day.activity=='running'">
-                              <input class="dailyrun" value="{{day.distance}}" id="running-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi at <input class="dailyrun" ng-blur="changed(day)" id="running-pace-{{day.date.getTime()}}" value="{{day.pace | formatPace}}">min/mi
+                              <input class="dailyrun" value="{{day.distance | formatDistance}}" id="running-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi at <input class="dailyrun" ng-blur="changed(day)" id="running-pace-{{day.date.getTime()}}" value="{{day.pace | formatPace}}">min/mi
                             </td>
                             <td class="col-3" ng-show="day.activity=='rowing'">
-                              <input class="dailyrun" value="{{day.distance}}" id="rowing-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi
+                              <input class="dailyrun" value="{{day.distance | formatDistance}}" id="rowing-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi
                             </td>
                             <td class="col-3" ng-show="day.activity=='swimming'">
-                              <input class="dailyrun" value="{{day.distance}}" id="swimming-dist-{{day.date.getTime()}}"  ng-blur="changed(day)"> mi
+                              <input class="dailyrun" value="{{day.distance | formatDistance}}" id="swimming-dist-{{day.date.getTime()}}"  ng-blur="changed(day)"> mi
                             </td>
                             <td class="col-3" ng-show="day.activity=='biking'">
-                              <input class="dailyrun" value="{{day.distance}}" id="biking-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi at <input class="dailyrun" id="biking-pace-{{day.date.getTime()}}" value="{{day.pace | formatPace}}"  ng-blur="changed(day)">min/mi
+                              <input class="dailyrun" value="{{day.distance | formatDistance}}" id="biking-dist-{{day.date.getTime()}}" ng-blur="changed(day)"> mi at <input class="dailyrun" id="biking-pace-{{day.date.getTime()}}" value="{{day.pace | formatPace}}"  ng-blur="changed(day)">min/mi
                             </td>
                             <td></td>
                           </tr>
@@ -128,11 +128,14 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="navigate">
+                <div class="alert alert-danger" ng-show="error">
+                  Please fill out all missing information. (You may need to expand a week's day-by-day breakdown.)
+                </div>
                 <form action="#create/programs">
                   <input type="submit" class="btn btn-default" value="Back">
                 </form>
-                <form action="#create/finished" style="display:inline-block">
-                  <input style="margin-left:10px" type="submit" class="btn btn-default" value="Done!">
+                <form style="display:inline-block">
+                  <input style="margin-left:10px" type="submit" class="btn btn-default" ng-click="submit()" value="Done!">
                 </form>
                 <br class="clearFloat">
               </div>
