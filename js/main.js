@@ -86,7 +86,6 @@ main.config(function(calendarConfig){
 
 main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVars', 'uiGmapIsReady', '$sce', 
   function($scope, $http, userVars, schedVars, trailVars, uiGmapIsReady, $sce) {
-    console.log(schedVars.currDayInfo);
     day = $scope;
     $scope.currDayInfo = schedVars.currDayInfo;
     $scope.trailVars = trailVars;
@@ -193,8 +192,13 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
     }
 
     $scope.submit = function() {
+        var needsPace = (schedVars.currDayInfo.activity == "running" || schedVars.currDayInfo.activity == "biking")
+        if(!needsPace){
+            $scope.submittedPace = "0:00";
+        }
         var re = /^\d\d?\:\d\d$/;
-        if ($scope.submittedDistance == undefined || $scope.submittedPace == undefined) {
+        if ($scope.submittedDistance == undefined ||
+            ($scope.submittedPace == undefined)) {
             $("#missing-info").show('fast');
             return;
         }
@@ -257,7 +261,7 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
                         }
                         schedVars.currDayInfo.distance = $scope.submittedDistance;
                         schedVars.currDayInfo.pace = $scope.stringToPace($scope.submittedPace);
-                        $scope.newValue(currTrail);
+                        if(needsPace){$scope.newValue(currTrail);}
                         break;
                     }
                 }
