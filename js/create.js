@@ -771,21 +771,21 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
 
     $scope.changed = function(day) {
       if (day.activity == 'rowing') {
-        var val = parseInt($('#rowing-dist-'+day.date.getTime()).val());
+        var val = parseFloat($('#rowing-dist-'+day.date.getTime()).val());
         if(isNaN(val) || val <= 0) {
           $('#rowing-dist-'+day.date.getTime()).val(day.distance == 0 ? "" : day.distance);
         } else {
           day.distance = val;
         }
       } else if (day.activity == 'swimming') {
-        var val = parseInt($('#swimming-dist-'+day.date.getTime()).val());
+        var val = parseFloat($('#swimming-dist-'+day.date.getTime()).val());
         if(isNaN(val) || val <= 0) {
           $('#swimming-dist-'+day.date.getTime()).val(day.distance == 0 ? "" : day.distance);
         } else {
           day.distance = val;
         }
       } else if (day.activity == 'biking') {
-        var val = parseInt($('#biking-dist-'+day.date.getTime()).val());
+        var val = parseFloat($('#biking-dist-'+day.date.getTime()).val());
         if(isNaN(val) || val <= 0) {
           $('#biking-dist-'+day.date.getTime()).val(day.distance == 0 ? "" : day.distance);
         } else {
@@ -801,7 +801,7 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
           day.pace = val;
         }
       } else if (day.activity == 'running') {
-        var val = parseInt($('#running-dist-'+day.date.getTime()).val());
+        var val = parseFloat($('#running-dist-'+day.date.getTime()).val());
         if(isNaN(val) || val <= 0) {
           $('#running-dist-'+day.date.getTime()).val(day.distance == 0 ? "" : day.distance);
         } else {
