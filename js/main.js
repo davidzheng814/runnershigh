@@ -90,16 +90,16 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
     $scope.currDayInfo = schedVars.currDayInfo;
     $scope.trailVars = trailVars;
     $scope.helpInd = -1;
-    if(userVars.firstTime && $scope.currDayInfo.activity == 'running') {
+    if(userVars.firstTime && ($scope.currDayInfo.activity == 'running' || $scope.currDayInfo.activity == 'biking')) {
         userVars.firstTime = false;
         $scope.helpInd = 0;
     }
 
     $scope.helpMessage = ['Welcome to your dashboard! Let\'s take a quick tour!<br><br>', 
     'This is your activity for the day.<br><br><br>', 
-    'Here you can view the trail we\'ve selected for you to run for the day. <br><br><br>', 
+    'Here you can view the trail we\'ve selected for you to follow for the day. <br><br><br>', 
     'Of course, you can also discover and choose other trails.<br><br>', 
-    'When you\'re done with your run, record your progress by clicking this button.<br><br>', 
+    'When you\'re done with your task, record your progress by clicking this button.<br><br>', 
     'You may change your desired goal for the day here.<br><br>',
     'Finally, you can view training details for other days with the calendar.<br><br>'
     ];
