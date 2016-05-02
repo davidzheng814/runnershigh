@@ -58,6 +58,9 @@
               <div class="selected-event-activity">{{currDayInfo.activity}}</div>
               <br>
               {{present[currDayInfo.activity]}} for <span class="day-distance">{{currDayInfo.distance}}</span> miles<span ng-show="currDayInfo.activity == 'running' || currDayInfo.activity == 'biking'"> at <span class="day-pace">{{paceToString(currDayInfo.pace)}}</span> min per mile</span>.
+              <div id="once-submitted" style="display: none">
+                Submitted: {{past[currDayInfo.activity]}} for <span class="day-distance">{{myProgressSubmission.distance}}</span> miles<span ng-show="currDayInfo.activity == 'running' || currDayInfo.activity == 'biking'"> at <span class="day-pace">{{paceToString(myProgressSubmission.pace)}}</span> min per mile</span>.
+              </div>
             </div>
 
             <div class="text-center" style="margin: 10px">

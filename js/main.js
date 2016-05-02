@@ -173,7 +173,7 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
 
     $scope.taskCompleted = function() {
         $('.submit-button').hide();
-        $('#input-fields').show();
+        $('#input-fields').show('slow');
     }
 
     function addTrails(){
@@ -194,12 +194,12 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
     $scope.submit = function() {
         var re = /^\d\d?\:\d\d$/;
         if ($scope.submittedDistance == undefined || $scope.submittedPace == undefined) {
-            $("#missing-info").show();
+            $("#missing-info").show('fast');
             return;
         }
         if ($scope.submittedPace.match(re)==null ||
             (parseInt($scope.submittedPace.slice(-2),10)>=60)) {
-            $("#pace-error").show();
+            $("#pace-error").show('fast');
             return;
         }
 
@@ -218,6 +218,7 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
                         break;
                     }
                 }
+                $('#input-fields').hide('slow', function() {$('.submit-button').show();});
                 break;
             case "present":
                 schedVars.myProgress.push({
@@ -226,6 +227,10 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
                     distance:$scope.submittedDistance,
                     pace:$scope.stringToPace($scope.submittedPace)
                 });
+                $scope.myProgressSubmission = schedVars.myProgress[schedVars.myProgress.length - 1];
+                $('.submit-button').text('Edit Submission');
+                $('#once-submitted').show('slow');
+                $('#input-fields').hide('slow', function() {$('.submit-button').show();});
                 break;
             case "future":
                 for(var i = 0; i < schedVars.schedule.length; i++){
@@ -255,13 +260,13 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
                         break;
                     }
                 }
+                $('#input-fields').hide('slow', function() {$('.submit-button').show();});
                 break;
             default:
                 console.log("bug")
         }
-
-        $('#submit-button').text("Submitted!");
-        $('#submit-button').prop("disabled", true);
+        $("#pace-error").hide('slow');
+        $("#missing-info").hide('slow');
     }
 
 //----------------------------------- MAP STUFF ---------------------------------//
