@@ -16,27 +16,23 @@
 
 <div class="container" id="day-container">
 
-<<<<<<< 715a880d23d07ce38800264880a62c169e83d782
-  <h1 class="day-heading" uib-popover-html="helpMessage[0]" popover-is-open="helpInd == 0" popover-placement="bottom" popover-trigger="none"> {{dateString(currDayInfo.date)}} </h1>
-=======
   <a
     class="btn btn-primary"
-    href="#main">
-    Back to Calendar
+    href="#main" uib-popover-html="helpMessage[6]" popover-is-open="helpInd == 5" popover-trigger="none" popover-placement="right">
+    Calendar
   </a>
 
-  <h1 class="day-heading"> {{dateString(currDayInfo.date)}} </h1>
->>>>>>> Some compatability for past present future
+  <h1 class="day-heading" uib-popover-html="helpMessage[0]" popover-is-open="helpInd == 0" popover-placement="bottom" popover-trigger="none"> {{dateString(currDayInfo.date)}} </h1>
 
   <div class="row">
     <div class="col-md-6">
-      <h3 class="day-trail-name"> {{trailVars.trails[trailVars.idToPos[currDayInfo.currTrail]].name}}</h3>
+      <h3 class="day-trail-name" uib-popover-html="helpMessage[2]" popover-is-open="helpInd == 2" popover-trigger="none"> {{trailVars.trails[trailVars.idToPos[currDayInfo.currTrail]].name}}</h3>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6">
-      <div id="minimap-view" uib-popover-html="helpMessage[2]" popover-is-open="helpInd == 2" popover-trigger="none">
+      <div id="minimap-view">
         <ui-gmap-google-map center='map.center' zoom='map.zoom' pan="true">
           <ui-gmap-polygon path="selectedTrail.path" geodesic="mapconfig.geodesic" editable="mapconfig.editable" draggable="mapconfig.draggable" fit="mapconfig.fit" fill="mapconfig.fill", static="mapconfig.static", stroke="mapconfig.stroke">
           </ui-gmap-polygon>
@@ -52,13 +48,26 @@
     <div class="col-md-6">
       <div class="panel panel-info selected-event">
 
-        <div class="panel-heading selected-event-heading">Task</div>
+        <div class="panel-heading selected-event-heading" uib-popover-html="helpMessage[1]" popover-is-open="helpInd == 1" popover-trigger="none">Task</div>
 
         <div class="panel-body selected-event">
 
+        <!-- For when you want to submit -->
+          <div id="present-panel" style="display: none">
+            <div style="margin-bottom: 30px; text-align: center">
+              <div class="selected-event-activity">{{currDayInfo.activity}}</div>
+              <br>
+              Go for {{currDayInfo.distance}} miles at {{paceToScurrDayInfo.pace}} min per mile.
+            </div>
+
+            <div class="text-center" style="margin: 10px">
+              <button class="btn btn-primary submit-button" ng-click="taskCompleted()" uib-popover-html="helpMessage[4]" popover-is-open="helpInd == 4" popover-trigger="none" popover-placement="bottom"> Task Completed </button>
+            </div>
+          </div>
+
         <!-- For when you want to edit a past thing -->
           <div id="past-panel" style="display: none">
-            <div style="margin-bottom: 30px; text-align: center" uib-popover-html="helpMessage[1]" popover-is-open="helpInd == 1" popover-trigger="none">
+            <div style="margin-bottom: 30px; text-align: center">
               <div class="selected-event-activity">{{currDayInfo.activity}}</div>
               <br>
               The goal was to go for {{currDayInfo.distance}} miles at {{currDayInfo.pace}} min per mile.
@@ -74,19 +83,6 @@
             </div>
           </div>
 
-
-        <!-- For when you want to submit -->
-          <div id="present-panel" style="display: none">
-            <div style="margin-bottom: 30px; text-align: center">
-              <div class="selected-event-activity">{{currDayInfo.activity}}</div>
-              Go for {{currDayInfo.distance}} miles at {{currDayInfo.pace}} min per mile.
-            </div>
-
-            <div class="text-center" style="margin: 10px">
-              <button class="btn btn-primary submit-button" ng-click="taskCompleted()"> Task Completed </button>
-            </div>
-          </div>
-
         <!-- For when you want to change a future goal -->
           <div id="future-panel" style="display: none">
             <div style="margin-bottom: 30px; text-align: center">
@@ -99,15 +95,15 @@
             </div>
 
             <div class="text-center" style="margin: 10px">
-              <button class="btn btn-primary submit-button" ng-click="taskCompleted()"> Change Goal </button>
+              <button class="btn btn-primary submit-button" ng-click="taskCompleted()" uib-popover-html="helpMessage[5]" popover-is-open="helpInd == 4" popover-trigger="none" popover-placement="left"> Change Goal </button>
             </div>
           </div>
 
         <!-- Input Fields -->
           <div style="display: none" id="input-fields">
             <div class="row">
-              <div class="col-md-6 text-right input-text" uib-popover-html="helpMessage[4]" popover-is-open="helpInd == 4" popover-trigger="none" popover-placement="left">
-                Distance Ran:
+              <div class="col-md-6 text-right input-text">
+                Distance:
               </div>
               <div class="col-md-4">
                 <div class="input-group">
@@ -119,7 +115,7 @@
 
             <div class="row" style="margin-top: 10px">
               <div class="col-md-6 text-right input-text">
-                Pace Ran:
+                Pace:
               </div>
               <div class="col-md-4">
                 <div class="input-group">

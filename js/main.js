@@ -54,8 +54,9 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
     'This is your activity for the day.<br><br><br>', 
     'Here you can view the trail we\'ve selected for you to run for the day. <br><br><br>', 
     'Of course, you can also discover and choose other trails.<br><br>', 
-    'When you\'re done with your training session, you can log your mileage and time here.<br><br>', 
-    'Finally, you can view training details for other days by using the calendar.'
+    'When you\'re done with your run, record your progress by clicking this button.<br><br>', 
+    'You may change your desired goal for the day here.<br><br>',
+    'Finally, you can view training details for other days with the calendar.<br><br>'
     ];
     for(i = 0; i < $scope.helpMessage.length; ++i) {
         var text = i == $scope.helpMessage.length - 1 ? 'Done' : 'Next';
@@ -140,7 +141,6 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
                         break;
                     }
                 }
-                console.log(schedVars.myProgress);
                 break;
             case "present":
                 schedVars.myProgress.push({
@@ -162,7 +162,6 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
                         break;
                     }
                 }
-                console.log(schedVars.schedule);
                 break;
             default:
                 console.log("bug")

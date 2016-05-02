@@ -925,6 +925,13 @@ create.controller('CreateDetailsCtrl', ['$scope', '$routeParams', 'createVars', 
 
 create.controller('CreateFinishedCtrl', ['$scope', '$routeParams', 'createVars', 'trailVars', 'schedVars',
   function($scope, $routeParams, createVars, trailVars, schedVars) {
+    for(var i = 0; i < schedVars.schedule.length; i++){
+      if(schedVars.schedule[i].activity != "rest"){
+        schedVars.currDay = schedVars.schedule[i];
+        break;
+      }
+    }
+
     function addTrails(){
       for(day of schedVars.schedule) {
         if(day.activity != 'running' && day.activity != 'biking') continue;

@@ -332,7 +332,7 @@ trail.controller('TrailCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trai
 
   $scope.save = function(){
     schedVars.currDayInfo.currTrail = $scope.selectedTrailId;
-    window.location.href="#main";
+    window.location.href="#main/day";
   }
 
   $scope.createPoint = function(lat, lng) {
