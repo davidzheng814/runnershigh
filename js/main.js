@@ -69,28 +69,117 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
         });
     }
 
+    //  CHOOSING WHICH ONE TO DO
+    var whichPanel = ""
+
+    if(schedVars.currDayInfo.date.getTime() < (new Date()).getTime()){ //If task has already passed
+        whichPanel = "present";
+        for(var i = 0; i < schedVars.myProgress.length; i++){
+            if(schedVars.myProgress[i].date.getTime() == schedVars.currDayInfo.date.getTime()){
+                $scope.myProgressSubmission = schedVars.myProgress[i];
+                whichPanel = "past";
+                break;
+            }
+        }
+        if(whichPanel == "past"){
+            $('#past-panel').show();
+        } else {
+            $('#present-panel').show();
+        }
+    } else {
+        whichPanel = "future";
+        $('#future-panel').show();
+    }
+
     $scope.dateString = function(date) {
         var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         return daysOfWeek[date.getDay()] + ", " + months[date.getMonth()] + " " + date.getDate();
     };
 
-    $scope.submit = function() {
-        if($scope.submittedDistance != undefined){
-            $scope.selectedEvent.distance = $scope.submittedDistance;
-        }
-        if($scope.submittedPace != undefined){
-            $scope.selectedEvent.pace = $scope.submittedPace;
-        }
-        $('#submitButton').text("Submitted!");
+    $scope.paceToString = function(pace) {
+        var int = Math.floor(pace);
+        var frac = pace - int;
+        var fracString = Math.round(frac*60).toString();
+        if(fracString.length == 1){ fracString = "0" + fracString;}
+        return int.toString() + ":" + fracString;
     }
 
+    $scope.stringToPace = function(string) {
+        var splitArray = string.split(":");
+        return parseInt(splitArray[0]) + (parseInt(splitArray[1]) / 60.);
+    }
+
+    $scope.taskCompleted = function() {
+        $('.submit-button').hide();
+        $('#input-fields').show();
+    }
+
+    $scope.submit = function() {
+        var re = /^\d\d?\:\d\d$/;
+        if ($scope.submittedDistance == undefined || $scope.submittedPace == undefined) {
+            $("#missing-info").show();
+            return;
+        }
+        if ($scope.submittedPace.match(re)==null ||
+            (parseInt($scope.submittedPace.slice(-2),10)>=60)) {
+            $("#pace-error").show();
+            return;
+        }
+
+        switch (whichPanel) {
+            case "past":
+                for(var i = 0; i < schedVars.myProgress.length; i++){
+                    if(schedVars.myProgress[i].date.getTime() == schedVars.currDayInfo.date.getTime()){
+                        schedVars.myProgress[i] = {
+                            date:schedVars.currDayInfo.date,
+                            activity:schedVars.currDayInfo.activity,
+                            distance:$scope.submittedDistance,
+                            pace:$scope.stringToPace($scope.submittedPace)
+                        }
+                        break;
+                    }
+                }
+                console.log(schedVars.myProgress);
+                break;
+            case "present":
+                schedVars.myProgress.push({
+                    date:schedVars.currDayInfo.date,
+                    activity:schedVars.currDayInfo.activity,
+                    distance:$scope.submittedDistance,
+                    pace:$scope.stringToPace($scope.submittedPace)
+                });
+                break;
+            case "future":
+                for(var i = 0; i < schedVars.schedule.length; i++){
+                    if(schedVars.schedule[i].date.getTime() == schedVars.currDayInfo.date.getTime()){
+                        schedVars.schedule[i] = {
+                            date:schedVars.currDayInfo.date,
+                            activity:schedVars.currDayInfo.activity,
+                            distance:$scope.submittedDistance,
+                            pace:$scope.stringToPace($scope.submittedPace)
+                        }
+                        break;
+                    }
+                }
+                console.log(schedVars.schedule);
+                break;
+            default:
+                console.log("bug")
+        }
+
+        $('#submit-button').text("Submitted!");
+        $('#submit-button').prop("disabled", true);
+    }
 
 //----------------------------------- MAP STUFF ---------------------------------//
     $scope.mapconfig = trailVars.mapconfig;
 
     if(!('currDayInfo' in schedVars)) {
       schedVars.currDayInfo = {
+        date: new Date(),
+        activity: "running",
+        pace: 8,
         distance:4.8,
         currTrail:"2"
       } 
