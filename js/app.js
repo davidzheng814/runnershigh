@@ -79,9 +79,18 @@ app.run(function($rootScope) {
       return new (unbind(constructor, null).apply(null, args));
   }
 
-  changeSystemDate = function(newDate) {
-    newDate = new Date(newDate);
+  changeSystemDate = function() {
+    newDate = new Date("05/30/16");
     var UTC = Date.UTC;
+    // schedVars.myProgress = [
+    //     {date:new Date("5/2/16"),distance:8.2,pace:9.1,activity:'running'},
+    //     {date:new Date("5/3/16"),activity:'rest'},
+    //     {date:new Date("5/4/16"),distance:6.3,pace:8.8,activity:'running'},
+    //     {date:new Date("5/5/16"),activity:'rest'},
+    //     {date:new Date("5/6/16"),distance:8.3,pace:7,activity:'biking'},
+    //     {date:new Date("5/7/16"),distance:9.2,pace:7,activity:'running'},
+    //     {date:new Date("5/8/16"),distance:}
+    // ];
     Date = function (Date) {
       MyDate.prototype = Date.prototype;
 
@@ -99,5 +108,5 @@ app.run(function($rootScope) {
       }
     }(Date);
     Date.UTC = UTC;
-  }
+  };
 });
