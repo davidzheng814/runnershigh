@@ -4,6 +4,7 @@
 </head>
 <body>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script type="text/javascript">
         text = "";
         window.onload = function () {
@@ -15,18 +16,45 @@
             var infoWindow = new google.maps.InfoWindow();
             var latlngbounds = new google.maps.LatLngBounds();
             var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            var prevLat = null;
+            var prevLng = null;
+            lastStretch = 0;
+            var firstLat = 0, firstLng = 0;
             google.maps.event.addListener(map, 'click', function (e) {
+                if(prevLat != null) {
+                    dLat = 69.02193004115126*Math.abs(e.latLng.lat() - prevLat);
+                    dLng = 51.18968516726398*Math.abs(e.latLng.lng() - prevLng);
+                    distance += Math.sqrt(dLat*dLat + dLng*dLng);
+                    dLat = 69.02193004115126*Math.abs(e.latLng.lat() - firstLat);
+                    dLng = 51.18968516726398*Math.abs(e.latLng.lng() - firstLng);
+                    lastStretch = Math.sqrt(dLat*dLat + dLng*dLng);
+                } else {
+                    firstLat = e.latLng.lat(), firstLng = e.latLng.lng();
+                }
+                prevLat = e.latLng.lat(), prevLng = e.latLng.lng();
                 text += "{latitude:" + e.latLng.lat() + ",longitude:" + e.latLng.lng() + "},\n";
+                $('#output').html(text);
+                $('#distance').html(distance + lastStretch);
             });
-            hi = function(){
-                console.log(text);
-            }
             reset = function(){
                 text = "";
+                distance = 0;
+                lastStretch = 0;
+                $('#output').html(text);
+                $('#distance').html(0);
+                prevLat = null; prevLng = null;
             }
+            distance = 0;
+            $('#distance').html(distance);
         }
     </script>
-    <div id="dvMap" style="width: 500px; height: 500px">
+    <div id="dvMap" style="width: 500px; height: 500px;float:left">
+    </div>
+    <div style="float:left;margin-left:30px">
+        Distance: <span id="distance"></span> mi<br> 
+        <button onclick="reset()" style="margin-bottom:10px">Reset</button>
+        <div id="output" style="width:500px">
+        </div>
     </div>
 </body>
 </html>
