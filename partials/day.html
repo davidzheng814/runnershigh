@@ -17,7 +17,7 @@
 <div class="container" id="day-container">
 
   <a
-    class="btn btn-primary"
+    class="btn btn-primary" style="position: absolute;"
     href="#main" uib-popover-html="helpMessage[6]" popover-is-open="helpInd == 5" popover-trigger="none" popover-placement="right">
     Calendar
   </a>
@@ -57,7 +57,7 @@
             <div style="margin-bottom: 30px; text-align: center">
               <div class="selected-event-activity">{{currDayInfo.activity}}</div>
               <br>
-              Go for {{currDayInfo.distance}} miles at {{paceToScurrDayInfo.pace}} min per mile.
+              {{present[currDayInfo.activity]}} for <span class="day-distance">{{currDayInfo.distance}}</span> miles<span ng-show="currDayInfo.activity == 'running' || currDayInfo.activity == 'biking'"> at <span class="day-pace">{{paceToString(currDayInfo.pace)}}</span> min per mile</span>.
             </div>
 
             <div class="text-center" style="margin: 10px">
@@ -70,9 +70,9 @@
             <div style="margin-bottom: 30px; text-align: center">
               <div class="selected-event-activity">{{currDayInfo.activity}}</div>
               <br>
-              The goal was to go for {{currDayInfo.distance}} miles at {{currDayInfo.pace}} min per mile.
+              Goal: {{present[currDayInfo.activity]}} for <span class="day-distance">{{currDayInfo.distance}}</span> miles<span ng-show="currDayInfo.activity == 'running' || currDayInfo.activity == 'biking'"> at <span class="day-pace">{{paceToString(currDayInfo.pace)}}</span> min per mile</span>.
               <br>
-              You actually went {{myProgressSubmission.distance}} miles at {{myProgressSubmission.pace}} min per mile.
+              Actual: {{past[currDayInfo.activity]}} for <span class="day-distance">{{myProgressSubmission.distance}}</span> miles<span ng-show="currDayInfo.activity == 'running' || currDayInfo.activity == 'biking'"> at <span class="day-pace">{{paceToString(myProgressSubmission.pace)}}</span> min per mile</span>.
             </div>
             <div style="margin: 20px; text-align: center">
               If you wish, you may edit your history.
@@ -88,7 +88,7 @@
             <div style="margin-bottom: 30px; text-align: center">
               <div class="selected-event-activity">{{currDayInfo.activity}}</div>
               <br>
-              The goal is to go for {{currDayInfo.distance}} miles at {{currDayInfo.pace}} min per mile.
+              Goal: {{present[currDayInfo.activity]}} for <span class="day-distance">{{currDayInfo.distance}}</span> miles<span ng-show="currDayInfo.activity == 'running' || currDayInfo.activity == 'biking'"> at <span class="day-pace">{{paceToString(currDayInfo.pace)}}</span> min per mile</span>.
             </div>
             <div style="margin: 20px; text-align: center">
               If you wish, you may change your goal.

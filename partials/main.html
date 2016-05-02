@@ -128,7 +128,7 @@
     </span>
 
     <div ng-show="day.events[0].activity != null && day.events[0].activity != 'rest'">
-      <div class="activity">
+      <div class="activity {{day.events[0].cssClass}}">
         {{day.events[0].activity}}
       </div>
       <div class="distance">
@@ -136,7 +136,8 @@
       </div>
     </div>
 
-    <div class="pace" ng-show="day.events[0].activity == 'running' || day.events[0].activity == 'biking'">
+    <div class="pace" ng-show="day.events[0].activity == 'running' || day.events[0].activity == 'biking' || 
+      day.events[0].activity == 'ran' || day.events[0].activity == 'biked'" >
       at {{day.events[0].pace}} min / mi
     </div>
 

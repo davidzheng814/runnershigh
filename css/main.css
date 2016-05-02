@@ -71,3 +71,19 @@
 .error-messages {
     font-size: 13px;
 }
+
+.past-event {
+    color: green;
+}
+
+.not-done-event {
+    color: red;
+}
+
+.day-distance {
+    font-size: 30px;
+}
+
+.day-pace {
+    font-size: 30px;
+}

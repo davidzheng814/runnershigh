@@ -3,19 +3,63 @@ var main = angular.module('main', []);
 main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVars', 'uiGmapIsReady',
   function($scope, $http, userVars, schedVars, trailVars, uiGmapIsReady) {
 
+    past = {
+        'running': 'ran',
+        'swimming': 'swam',
+        'biking': 'biked',
+        'rowing': 'rowed',
+        'rest': 'rest'
+    };
+
     $scope.calendarView = 'month';
     $scope.viewDate = new Date();
+
+    paceToString = function(pace) {
+        var int = Math.floor(pace);
+        var frac = pace - int;
+        var fracString = Math.round(frac*60).toString();
+        if(fracString.length == 1){ fracString = "0" + fracString;}
+        return int.toString() + ":" + fracString;
+    }
 
     $scope.events = []
     for(var i=0; i < schedVars.schedule.length; i++){
         var x = schedVars.schedule[i]
-        $scope.events.push({
-            startsAt: x.date,
-            activity: x.activity,
-            pace: x.pace,
-            distance: x.distance,
-        });
+        if(x.activity != "rest"){
+            var alreadyDone = false;
+            for(var j=0; j < schedVars.myProgress.length; j++){
+                if(x.date.getTime() == schedVars.myProgress[j].date.getTime()){
+                    var y = schedVars.myProgress[j];
+                    alreadyDone = true;
+                    break;
+                }
+            }
+            if(alreadyDone){
+                $scope.events.push({
+                    startsAt: x.date,
+                    activity: past[x.activity],
+                    pace: paceToString(y.pace),
+                    distance: y.distance,
+                    cssClass: 'past-event'
+                });
+            } else {
+                var whichClass = "";
+                var yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                if(x.date.getTime() < yesterday.getTime()){
+                    whichClass = "not-done-event";
+                }
+                $scope.events.push({
+                    startsAt: x.date,
+                    activity: x.activity,
+                    pace: paceToString(x.pace),
+                    distance: x.distance,
+                    cssClass: whichClass
+                });
+            }
+        }
     }
+
 
     $scope.dayClicked = function(calendarDate) {
         //scan schedule until you see something with this date, then go to that page
@@ -25,6 +69,7 @@ main.controller('MainCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailV
             var x = schedVars.schedule[i];
             if(x.date.getTime() == calendarDate.getTime()){
                 schedVars.currDayInfo = x;
+                if(x.activity == "rest"){return;}
                 window.location.href = "#main/day"
             }
         }
@@ -69,6 +114,21 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
             $scope.helpInd += 1;
         });
     }
+
+    $scope.past = {
+        'running': 'Ran',
+        'swimming': 'Swam',
+        'biking': 'Biked',
+        'rowing': 'Rowed',
+        'rest': 'rest'
+    };
+    $scope.present = {
+        'running': 'Run',
+        'swimming': 'Swim',
+        'biking': 'Bike',
+        'rowing': 'Row',
+        'rest': 'rest'
+    };
 
     //  CHOOSING WHICH ONE TO DO
     var whichPanel = ""
