@@ -927,7 +927,7 @@ create.controller('CreateFinishedCtrl', ['$scope', '$routeParams', 'createVars',
   function($scope, $routeParams, createVars, trailVars, schedVars) {
     for(var i = 0; i < schedVars.schedule.length; i++){
       if(schedVars.schedule[i].activity != "rest"){
-        schedVars.currDay = schedVars.schedule[i];
+        schedVars.currDayInfo = schedVars.schedule[i];
         break;
       }
     }

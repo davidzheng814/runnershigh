@@ -110,7 +110,7 @@ trail.controller('TrailCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trai
   if(!('currDayInfo' in schedVars)) {
     schedVars.currDayInfo = {
       distance:4.8,
-      currTrail:"9"
+      currTrail:"2"
     } 
   }// TODO
   $scope.currDayInfo = schedVars.currDayInfo;
