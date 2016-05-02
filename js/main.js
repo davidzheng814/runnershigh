@@ -45,7 +45,7 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
     $scope.currDayInfo = schedVars.currDayInfo;
     $scope.trailVars = trailVars;
     $scope.helpInd = -1;
-    if(userVars.firstTime && $scope.currDayInfo.activity != 'rest') {
+    if(userVars.firstTime && $scope.currDayInfo.activity == 'running') {
         userVars.firstTime = false;
         $scope.helpInd = 0;
     }
