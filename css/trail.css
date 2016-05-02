@@ -63,7 +63,7 @@
 
 #trail-list {
   height:75vh;
-  overflow:scroll;;
+  overflow:auto;
 }
 
 #save-btn {

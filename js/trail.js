@@ -110,7 +110,7 @@ trail.controller('TrailCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trai
   if(!('currDayInfo' in schedVars)) {
     schedVars.currDayInfo = {
       distance:4.8,
-      currTrail:"2"
+      currTrail:"9"
     } 
   }// TODO
   $scope.currDayInfo = schedVars.currDayInfo;
@@ -160,12 +160,6 @@ trail.controller('TrailCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trai
 
   $scope.resizeMap();
 
-  $scope.$on('$viewContentLoaded', function(){
-    var trailListOffset = $('#trail-list form').offset();
-    var delta = Math.max(trailVars.idToPos[$scope.selectedTrailId]*78 - 200, 0);
-    $('#trail-list form').offset({top:trailListOffset.top - delta});
-  });
-
   $scope.newValue = function(newValue){
     $scope.selectedTrailId = newValue;
     $scope.selectedTrail = trailVars.trails[trailVars.idToPos[newValue]];
@@ -187,3 +181,15 @@ trail.controller('TrailCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trai
     });
   });
 }]);
+
+trail.directive("setScroll", function($document) {
+    return {
+        restrict: "A",
+        link: function(scope, elem, attrs) {
+            var delta = Math.max(trailVars.idToPos[scope.selectedTrailId]*78 - 200, 0);
+            setTimeout(function(){
+                elem.scrollTop(delta);
+            }, 1);
+        }
+    }
+});

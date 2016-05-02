@@ -1,8 +1,8 @@
 <div id="trail">
   <div id="trail-sidebar">
     <div id="picker-instruct"><h3>Choose a trail around {{currDayInfo.distance}} miles long:</h3></div>
-    <div id="trail-list">
-      <form>
+    <div id="trail-list" set-scroll>
+      <form>  
       <ul>
         <li ng-repeat="trail in trailVars.trails" style="list-style-type:none">
           <div class="trail-cell" id="trail-cell-{{trail.id}}" ng-click="newValue(trail.id)" ng-class="{'original-trail':trail.id==currTrail}">
@@ -10,7 +10,7 @@
             <div>
               Distance: {{trail.distance}} miles
             </div>
-            <input class="trail-cell-select" type="radio" name="trail" ng-model="selectedTrailId" ng-value="trail.id" >
+            <input class="trail-cell-select" type="radio" name="trail" ng-model="selectedTrailId" ng-value="trail.id">
             <hr>
           </div>
         </li>
