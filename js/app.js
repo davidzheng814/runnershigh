@@ -80,6 +80,7 @@ app.run(function($rootScope) {
   }
 
   changeSystemDate = function(newDate) {
+    newDate = new Date(newDate);
     var UTC = Date.UTC;
     Date = function (Date) {
       MyDate.prototype = Date.prototype;

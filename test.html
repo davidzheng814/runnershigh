@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        text = "";
+        window.onload = function () {
+            var mapOptions = {
+                center: new google.maps.LatLng( 42.3736, -71.1097),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var latlngbounds = new google.maps.LatLngBounds();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            google.maps.event.addListener(map, 'click', function (e) {
+                text += "{latitude:" + e.latLng.lat() + ",longitude:" + e.latLng.lng() + "},\n";
+            });
+            hi = function(){
+                console.log(text);
+            }
+            reset = function(){
+                text = "";
+            }
+        }
+    </script>
+    <div id="dvMap" style="width: 500px; height: 500px">
+    </div>
+</body>
+</html>
