@@ -86,6 +86,7 @@ main.config(function(calendarConfig){
 
 main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVars', 'uiGmapIsReady', '$sce', 
   function($scope, $http, userVars, schedVars, trailVars, uiGmapIsReady, $sce) {
+    console.log(schedVars.currDayInfo);
     day = $scope;
     $scope.currDayInfo = schedVars.currDayInfo;
     $scope.trailVars = trailVars;
@@ -270,6 +271,10 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
     }
 
 //----------------------------------- MAP STUFF ---------------------------------//
+    if($scope.currDayInfo.activity != "running" && $scope.currDayInfo.activity != "biking"){
+        return;
+    }
+    
     $scope.mapconfig = trailVars.mapconfig;
 
     if(!('currDayInfo' in schedVars)) {
@@ -281,7 +286,6 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
         currTrail:"2"
       } 
     }// TODO
-    $scope.currDayInfo = schedVars.currDayInfo;
     $scope.startLocId = "startLocId";
     $scope.currTrail = schedVars.currDayInfo.currTrail;
     $scope.selectedTrailId = $scope.currTrail;
