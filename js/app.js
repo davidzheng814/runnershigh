@@ -110,8 +110,7 @@ app.run(function($rootScope) {
         {date:new Date("5/26/16"),activity:'rest'},
         {date:new Date("5/27/16"),distance:7.4,pace:5.6,activity:'biking'},
         {date:new Date("5/28/16"),distance:8.2,pace:8.2,activity:'running'},
-        {date:new Date("5/29/16"),distance:1.5,activity:'rowing'},
-        {date:new Date("5/30/16"),distance:9.3,pace:7.6,activity:'running'}
+        {date:new Date("5/29/16"),distance:1.5,activity:'rowing'}
     ];
     Date = function (Date) {
       MyDate.prototype = Date.prototype;
