@@ -176,6 +176,21 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
         $('#input-fields').show();
     }
 
+    function addTrails(){
+      for(day of schedVars.schedule) {
+        if(day.activity != 'running' && day.activity != 'biking') continue;
+        var closest = null;
+        var diff = 0;
+        for(trail of trailVars.trails) {
+          if(closest == null || Math.abs(trail.distance - day.distance) < diff) {
+            closest = trail;
+            diff = Math.abs(trail.distance - day.distance);
+          }
+        }
+        day.currTrail = closest.id;
+      }
+    }
+
     $scope.submit = function() {
         var re = /^\d\d?\:\d\d$/;
         if ($scope.submittedDistance == undefined || $scope.submittedPace == undefined) {
@@ -198,6 +213,8 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
                             distance:$scope.submittedDistance,
                             pace:$scope.stringToPace($scope.submittedPace)
                         }
+                        $scope.myProgressSubmission.distance = $scope.submittedDistance;
+                        $scope.myProgressSubmission.pace = $scope.stringToPace($scope.submittedPace);
                         break;
                     }
                 }
@@ -213,12 +230,28 @@ main.controller('DayCtrl', ['$scope', '$http', 'userVars', 'schedVars', 'trailVa
             case "future":
                 for(var i = 0; i < schedVars.schedule.length; i++){
                     if(schedVars.schedule[i].date.getTime() == schedVars.currDayInfo.date.getTime()){
+                        var day = schedVars.schedule[i];
+                        if(day.activity == 'running' || day.activity == 'biking'){
+                            var closest = null;
+                            var diff = 0;
+                            for(trail of trailVars.trails) {
+                              if(closest == null || Math.abs(trail.distance - $scope.submittedDistance) < diff) {
+                                closest = trail;
+                                diff = Math.abs(trail.distance - $scope.submittedDistance);
+                              }
+                            }
+                            var currTrail = closest.id;
+                        }
                         schedVars.schedule[i] = {
                             date:schedVars.currDayInfo.date,
                             activity:schedVars.currDayInfo.activity,
                             distance:$scope.submittedDistance,
-                            pace:$scope.stringToPace($scope.submittedPace)
+                            pace:$scope.stringToPace($scope.submittedPace),
+                            currTrail:currTrail
                         }
+                        schedVars.currDayInfo.distance = $scope.submittedDistance;
+                        schedVars.currDayInfo.pace = $scope.stringToPace($scope.submittedPace);
+                        $scope.newValue(currTrail);
                         break;
                     }
                 }
