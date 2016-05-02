@@ -117,7 +117,7 @@ create.factory('createVars', function(){
         {distance:0},
         {distance:0}]
     }}, {
-    activities:['running', 'biking', 'running', 'biking', 'running', 'biking'],
+    activities:['running', 'biking', 'running', 'biking', 'running', 'biking', 'running'],
     sched:{
       running:[
         {distance:6,pace:9},
@@ -228,7 +228,7 @@ create.factory('createVars', function(){
         {distance:0},
         {distance:0}]
     }}, {
-    activities:['running', 'running', 'running', 'running', 'running'],
+    activities:['running', 'running', 'running', 'running', 'running', 'running', 'running'],
     sched:{
       running:[
         {distance:4,pace:9},
